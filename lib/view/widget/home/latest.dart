@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/latestcontroller.dart';
-import 'package:learning_managment_system/controller/recomendedcontroller.dart';
+import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
+import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
+import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/constant/imageasset%20copy.dart';
 
 
 class LatestHome extends StatelessWidget {
@@ -38,14 +40,14 @@ class LatestHome extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Color(0xff8D6DFE),
-                          Colors.deepOrange.shade300,
+                         AppColor.primaryColor,
+                          AppColor.orange,
                           //Color(0xff8D6DFE),
-                          Colors.white.withOpacity(0.9),
+                         AppColor.whiteColor,
                         ]),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color:AppColor.grey2,
                         spreadRadius: 2,
                         blurRadius: 20,
                         blurStyle: BlurStyle.inner,
@@ -67,7 +69,7 @@ class LatestHome extends StatelessWidget {
                       child: Obx(() {
                         if (controller.alllatest[index].image!.isEmpty) {
                           return Image.asset(
-                            'assets/images/logo.png',
+                           ImageAsset.logo,
                             height: 150,
                             width: 100,
                           );
@@ -114,7 +116,7 @@ class LatestHome extends StatelessWidget {
                                   icon: Icon(
                                     Icons.favorite,
                                     size: 18,
-                                    color: Colors.red.shade700,
+                                    color: AppColor.red,
                                   ),
                                   label: Text(
                                       '${controller.alllatest[index].totalLikes}  Likes',

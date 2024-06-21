@@ -10,4 +10,8 @@ class AppUrl {
   static String forgetPasswordUrl = "$baseUrl/auth/forget-password";
   static String resetPassword = "$baseUrl/auth/reset-password";
   static String quiz = "$baseUrl/courses/1";
+  static String recommended = "$baseUrl/home";
+  static String latest = "$baseUrl/home";
+  static String home = "$baseUrl/courses?search=an";
+  static String categories = "$baseUrl/home";
 }

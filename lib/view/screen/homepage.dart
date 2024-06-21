@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/homecontroller.dart';
-import 'package:learning_managment_system/controller/recomendedcontroller.dart';
-import 'package:learning_managment_system/data/model/model/searchmodel.dart';
+import 'package:learning_managment_system/controller/Home/homecontroller.dart';
+import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
+import 'package:learning_managment_system/data/model/home/searchmodel.dart';
 import 'package:learning_managment_system/view/widget/home/customappbar.dart';
 import 'package:learning_managment_system/view/widget/home/customcard.dart';
 import 'package:learning_managment_system/view/widget/home/recomende.dart';
