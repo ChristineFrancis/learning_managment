@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:learning_managment_system/core/constant/url.dart';
-import 'package:learning_managment_system/data/model/home/categoriesmodle.dart';
+import 'package:learning_managment_system/model/home/categoriesmodle.dart';
 import 'package:learning_managment_system/services/services.dart';
 
 class CategoriesHomeController extends GetxController {

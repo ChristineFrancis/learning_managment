@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
 import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
-import 'package:learning_managment_system/core/constant/imageasset%20copy.dart';
+import 'package:learning_managment_system/core/constant/imageasset.dart';
+
 
 
 class LatestHome extends StatelessWidget {
@@ -69,7 +70,7 @@ class LatestHome extends StatelessWidget {
                       child: Obx(() {
                         if (controller.alllatest[index].image!.isEmpty) {
                           return Image.asset(
-                           ImageAsset.logo,
+                           ImageAsset.logoImage,
                             height: 150,
                             width: 100,
                           );

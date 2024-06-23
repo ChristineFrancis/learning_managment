@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 import 'package:learning_managment_system/core/constant/url.dart';
-import 'package:learning_managment_system/data/model/home/recommendemodel.dart';
+import 'package:learning_managment_system/model/home/recommendemodel.dart';
 import 'package:learning_managment_system/services/services.dart';
 
 class RecomendeController extends GetxController {

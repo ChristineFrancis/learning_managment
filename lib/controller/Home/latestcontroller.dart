@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:learning_managment_system/core/constant/url.dart';
-import 'package:learning_managment_system/data/model/home/latestmodel.dart';
+import 'package:learning_managment_system/model/home/latestmodel.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:learning_managment_system/services/services.dart';

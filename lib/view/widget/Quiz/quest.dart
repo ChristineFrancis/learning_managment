@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:learning_managment_system/controller/Quiz/quiz_controller.dart';
-import 'package:learning_managment_system/controller/Quiz/quiz_page_controller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 
 class MyWidget extends StatelessWidget {
 //   const MyWidget({super.key});
