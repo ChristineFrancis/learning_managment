@@ -1,5 +1,5 @@
 class AppUrl {
-  static String ip = '192.168.1.4';
+   static String ip='192.168.1.102';
   static String baseUrl = 'http://$ip:8000/api/v1/students';
   static String signUpUrl = "$baseUrl/auth/register";
   static String loginUrl = "$baseUrl/auth/login";

@@ -1,3 +1,4 @@
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
 abstract class QuizController extends GetxController {
@@ -26,4 +27,17 @@ class QuizControllerImp extends QuizController {
     
     return selectedAnswers[questionIndex];
   }
+
+
+int? valu;
+OnChanged(int val)
+{
+  valu=val;
+  update();
+  }
+
+
+
+
+
 }
