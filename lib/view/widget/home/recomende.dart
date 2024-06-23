@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/homecontroller.dart';
-import 'package:learning_managment_system/controller/latestcontroller.dart';
-import 'package:learning_managment_system/controller/recomendedcontroller.dart';
+import 'package:learning_managment_system/controller/Home/homecontroller.dart';
+import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
+import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
+import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/constant/imageasset.dart';
 import 'package:learning_managment_system/view/widget/home/latest.dart';
 
 class RecomendedHome extends StatelessWidget {
@@ -33,13 +35,13 @@ class RecomendedHome extends StatelessWidget {
                 },
                 text: 'Recommended',
                 gradient:
-                    LinearGradient(colors: [Colors.pink, Colors.blue.shade700]),
+                    LinearGradient(colors: [AppColor.pink, AppColor.blue]),
                 selectedGradientColor:
-                    LinearGradient(colors: [Colors.lightBlue, Colors.purple]),
-                selectedTextColor: Colors.white,
+                    LinearGradient(colors: [AppColor.lightblue, AppColor.purple]),
+                selectedTextColor:AppColor.whiteColor,
                 transitionType: TransitionType.LEFT_BOTTOM_ROUNDER,
                 isReverse: true,
-                borderColor: Colors.white,
+                borderColor: AppColor.whiteColor,
                 borderRadius: 20,
               ),
             )),
@@ -57,10 +59,10 @@ class RecomendedHome extends StatelessWidget {
                   },
                   text: 'Latest',
                   gradient: LinearGradient(
-                      colors: [Colors.pink, Colors.blue.shade700]),
+                      colors: [AppColor.pink, AppColor.blue]),
                   selectedGradientColor:
-                      LinearGradient(colors: [Colors.lightBlue, Colors.purple]),
-                  selectedTextColor: Colors.white,
+                      LinearGradient(colors: [AppColor.lightblue, AppColor.purple]),
+                  selectedTextColor:AppColor.whiteColor,
                   transitionType: TransitionType.LEFT_BOTTOM_ROUNDER,
                   isReverse: true,
                   borderColor: Colors.white,
@@ -102,14 +104,14 @@ class RecomendedHome extends StatelessWidget {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  Color(0xff8D6DFE),
-                                  Colors.deepOrange.shade300,
+                                 AppColor.primaryColor,
+                                 AppColor.orange,
                                   //Color(0xff8D6DFE),
                                   Colors.white.withOpacity(0.9),
                                 ]),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: AppColor.grey2,
                                 spreadRadius: 2,
                                 blurRadius: 20,
                                 blurStyle: BlurStyle.inner,
@@ -135,7 +137,7 @@ class RecomendedHome extends StatelessWidget {
                                 if (controller.allrecommendedCourses[index]
                                     .image!.isEmpty) {
                                   return Image.asset(
-                                    'assets/images/logo.png',
+                                  ImageAsset.logoImage,
                                     height: 150,
                                     width: 100,
                                   );
@@ -196,7 +198,7 @@ class RecomendedHome extends StatelessWidget {
                                             icon: Icon(
                                               Icons.favorite,
                                               size: 18,
-                                              color: Colors.red.shade700,
+                                              color:AppColor.red,
                                             ),
                                             label: Text(
                                                 '${controller.allrecommendedCourses[index].totalLikes}  Likes',

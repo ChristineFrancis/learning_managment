@@ -1,17 +1,20 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:learning_managment_system/data/model/model/latestmodel.dart';
+import 'package:learning_managment_system/core/constant/url.dart';
+import 'package:learning_managment_system/data/model/home/latestmodel.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:learning_managment_system/services/services.dart';
 
 class LatestController extends GetxController {
   var alllatest = <Latest>[].obs;
   var displayLatest = <Latest>[].obs;
   int itemsDisplayed = 3;
-  final String token = '4|BL5Gs1OPovK0UaiFdfxqr1SFltsddOBmfodtgVMYce9913dc';
-  final String url = 'http://192.168.1.4:8000/api/v1/students/home';
+ 
+  final String url = AppUrl.latest;
 
+MyServices myServices=Get.find();
   @override
   void onInit() {
     fetchLatest();
@@ -19,6 +22,7 @@ class LatestController extends GetxController {
   }
 
   void fetchLatest() async {
+    String? token = myServices.sharedPreferences.getString('access_token');
     final response = await http.get(Uri.parse(url), headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',

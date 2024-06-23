@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
-import 'package:learning_managment_system/data/model/model/recommendemodel.dart';
-
+import 'package:learning_managment_system/core/constant/url.dart';
+import 'package:learning_managment_system/data/model/home/recommendemodel.dart';
+import 'package:learning_managment_system/services/services.dart';
 
 class RecomendeController extends GetxController {
+  
   var isVisible1 = true.obs;
   var isVisible2 = false.obs;
-  
+
   void showSecond() {
     isVisible1.value = false;
     isVisible2.value = true;
@@ -19,10 +21,11 @@ class RecomendeController extends GetxController {
 
   int itemsDisplayed = 3;
 
- 
+  MyServices myServices = Get.find();
+  
+  // final String token = '4|BL5Gs1OPovK0UaiFdfxqr1SFltsddOBmfodtgVMYce9913dc';
+  final String url = AppUrl.recommended;
 
-  final String token = '4|BL5Gs1OPovK0UaiFdfxqr1SFltsddOBmfodtgVMYce9913dc';
-  final String url = 'http://192.168.1.4:8000/api/v1/students/home';
 
   @override
   void onInit() {
@@ -31,6 +34,7 @@ class RecomendeController extends GetxController {
   }
 
   void fetchRecommendedCourses() async {
+    String? token = myServices.sharedPreferences.getString('access_token');
     final response = await http.get(Uri.parse(url), headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',

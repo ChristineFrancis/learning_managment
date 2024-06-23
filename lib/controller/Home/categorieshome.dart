@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:learning_managment_system/data/model/model/categoriesmodle.dart';
-
+import 'package:learning_managment_system/core/constant/url.dart';
+import 'package:learning_managment_system/data/model/home/categoriesmodle.dart';
+import 'package:learning_managment_system/services/services.dart';
 
 class CategoriesHomeController extends GetxController {
   final http.Client client = http.Client();
-  final String token = '4|BL5Gs1OPovK0UaiFdfxqr1SFltsddOBmfodtgVMYce9913dc';
-  final String url = 'http://192.168.1.4:8000/api/v1/students/home';
+ 
+  final String url = AppUrl.categories;
   var categories = <Categories>[].obs;
 
+MyServices myServices=Get.find();
   @override
   void onInit() {
     fetchCategories();
@@ -17,6 +19,7 @@ class CategoriesHomeController extends GetxController {
   }
 
   void fetchCategories() async {
+    String? token = myServices.sharedPreferences.getString('access_token');
     final response = await client.get(Uri.parse(url), headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',

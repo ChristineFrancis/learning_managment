@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/categorieshome.dart';
+import 'package:learning_managment_system/controller/Home/categorieshome.dart';
 import 'package:learning_managment_system/controller/favorite.dart';
+import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/constant/imageasset.dart';
 
 
 class CustomCardHome extends StatelessWidget {
@@ -34,7 +36,7 @@ class CustomCardHome extends StatelessWidget {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: AppColor.grey2,
                         spreadRadius: 1,
                         blurRadius: 4,
                         blurStyle: BlurStyle.outer,
@@ -49,7 +51,7 @@ class CustomCardHome extends StatelessWidget {
                     Obx(() {
                       if (categoriesController
                           .categories[index].image!.isEmpty) {
-                        return Image.asset("assets/images/logo.png");
+                        return Image.asset(ImageAsset.logoImage);
                       } else {
                         return Image.network(
                           categoriesController.categories[index].image!,

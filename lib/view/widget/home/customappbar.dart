@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Auth/signup_controller.dart';
+import 'package:learning_managment_system/controller/Home/homecontroller.dart';
+import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/constant/imageasset.dart';
 
 class CustomAppBarHome extends StatelessWidget {
   final void Function()? onPressedSearch;
   final Function(String)? onChanged;
   final TextEditingController mycontroller;
-  const CustomAppBarHome(
+
+ 
+  CustomAppBarHome(
       {super.key,
       this.onPressedSearch,
       this.onChanged,
       required this.mycontroller});
-
+  final SignUpControllerImp controller = Get.put(SignUpControllerImp());
+  final HomeControllerImp homeController = Get.put(HomeControllerImp());
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,13 +26,13 @@ class CustomAppBarHome extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: AppColor.grey2,
               spreadRadius: 2,
               blurRadius: 4,
               offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
-          color: const Color(0xff8D6DFE),
+          color: AppColor.primaryColor,
           borderRadius:
               const BorderRadius.only(bottomRight: Radius.circular(70))),
       child: Column(
@@ -31,11 +40,11 @@ class CustomAppBarHome extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "Hi...",
-                  style: TextStyle(
+                  "Hi ${homeController.name!}",
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32,
                       fontFamily: "Exo 2",
@@ -45,7 +54,7 @@ class CustomAppBarHome extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  ImageAsset.logoImage,
                   width: 100,
                 ),
               ),
