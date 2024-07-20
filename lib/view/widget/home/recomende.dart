@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/Home/homecontroller.dart';
+import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
 import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
@@ -11,7 +11,7 @@ import 'package:learning_managment_system/view/widget/home/latest.dart';
 
 class RecomendedHome extends StatelessWidget {
   RecomendedHome();
-  final HomeController homeController = Get.put(HomeController());
+  final HomeController homeController = Get.put(HomeControllerImp());
   final RecomendeController controller = Get.put(RecomendeController());
 
   final LatestController controllerLatest = Get.put(LatestController());
@@ -35,10 +35,10 @@ class RecomendedHome extends StatelessWidget {
                 },
                 text: 'Recommended',
                 gradient:
-                    LinearGradient(colors: [AppColor.pink, AppColor.blue]),
-                selectedGradientColor:
-                    LinearGradient(colors: [AppColor.lightblue, AppColor.purple]),
-                selectedTextColor:AppColor.whiteColor,
+                    LinearGradient(colors: [AppColor.purple, AppColor.blue]),
+                selectedGradientColor: LinearGradient(
+                    colors: [AppColor.lightblue, AppColor.purple]),
+                selectedTextColor: AppColor.whiteColor,
                 transitionType: TransitionType.LEFT_BOTTOM_ROUNDER,
                 isReverse: true,
                 borderColor: AppColor.whiteColor,
@@ -58,11 +58,11 @@ class RecomendedHome extends StatelessWidget {
                     homeController.changeTabIndex(1);
                   },
                   text: 'Latest',
-                  gradient: LinearGradient(
-                      colors: [AppColor.pink, AppColor.blue]),
-                  selectedGradientColor:
-                      LinearGradient(colors: [AppColor.lightblue, AppColor.purple]),
-                  selectedTextColor:AppColor.whiteColor,
+                  gradient:
+                      LinearGradient(colors: [AppColor.purple, AppColor.blue]),
+                  selectedGradientColor: LinearGradient(
+                      colors: [AppColor.lightblue, AppColor.purple]),
+                  selectedTextColor: AppColor.whiteColor,
                   transitionType: TransitionType.LEFT_BOTTOM_ROUNDER,
                   isReverse: true,
                   borderColor: Colors.white,
@@ -97,17 +97,19 @@ class RecomendedHome extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 8),
                       child: Container(
-                        width: 320,
+                        width: 330,
 
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                 AppColor.primaryColor,
-                                 AppColor.orange,
-                                  //Color(0xff8D6DFE),
-                                  Colors.white.withOpacity(0.9),
+                                  AppColor.purple2,
+                                  AppColor.purple3,
+                                  AppColor.purple6,
+                                  AppColor.primaryColor,
+                                  AppColor.purple4,
+                                  AppColor.purple5
                                 ]),
                             boxShadow: [
                               BoxShadow(
@@ -131,27 +133,7 @@ class RecomendedHome extends StatelessWidget {
                           children: [
                             // Expanded(
                             //    child:
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Obx(() {
-                                if (controller.allrecommendedCourses[index]
-                                    .image!.isEmpty) {
-                                  return Image.asset(
-                                  ImageAsset.logoImage,
-                                    height: 150,
-                                    width: 100,
-                                  );
-                                } else {
-                                  return Image.network(
-                                    controller
-                                        .allrecommendedCourses[index].image!,
-                                    height: 70,
-                                    width: 20,
-                                    alignment: Alignment.topCenter,
-                                  );
-                                }
-                              }),
-                            ),
+
                             //    ),
                             Column(
                                 mainAxisAlignment:
@@ -167,8 +149,8 @@ class RecomendedHome extends StatelessWidget {
                                                 .allrecommendedCourses[index]
                                                 .categoryName!,
                                             style: const TextStyle(
-                                                fontSize: 25,
-                                                fontFamily: "Exo 2",
+                                                fontSize: 15,
+                                                color: AppColor.whiteColor,
                                                 fontWeight: FontWeight.w500))),
                                       ),
                                     ],
@@ -181,11 +163,12 @@ class RecomendedHome extends StatelessWidget {
                                               .allrecommendedCourses[index]
                                               .name!,
                                           style: const TextStyle(
-                                              fontSize: 15,
-                                              fontFamily: "Exo 2",
-                                              fontWeight: FontWeight.w500))),
+                                              fontSize: 25,
+                                              color: AppColor.whiteColor,
+                                              fontWeight: FontWeight.w600))),
                                     ],
                                   ),
+                                   
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -195,17 +178,17 @@ class RecomendedHome extends StatelessWidget {
                                               const EdgeInsets.only(top: 0.0),
                                           child: TextButton.icon(
                                             onPressed: () {},
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              size: 18,
-                                              color:AppColor.red,
+                                            icon: const Icon(
+                                              Icons.star,
+                                              size: 20,
+                                              color: Color.fromARGB(
+                                                  255, 255, 209, 58),
                                             ),
                                             label: Text(
                                                 '${controller.allrecommendedCourses[index].totalLikes}  Likes',
                                                 style: const TextStyle(
                                                     fontSize: 15,
-                                                    color: Colors.black,
-                                                    fontFamily: "Exo 2",
+                                                    color: AppColor.whiteColor,
                                                     fontWeight:
                                                         FontWeight.w500)),
                                           ),
@@ -213,7 +196,28 @@ class RecomendedHome extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                ])
+                                ]),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Obx(() {
+                                if (controller.allrecommendedCourses[index]
+                                    .image!.isEmpty) {
+                                  return Image.asset(
+                                    ImageAsset.logoImage,
+                                    height: 150,
+                                    width: 100,
+                                  );
+                                } else {
+                                  return Image.network(
+                                    controller
+                                        .allrecommendedCourses[index].image!,
+                                    height: 70,
+                                    width: 20,
+                                    alignment: Alignment.topCenter,
+                                  );
+                                }
+                              }),
+                            ),
                           ],
                         ),
                       ),

@@ -1,5 +1,7 @@
-import 'package:learning_managment_system/core/constant/imageasset%20copy.dart';
-import 'package:learning_managment_system/data/model/home/onboardingmodel.dart';
+
+import 'package:learning_managment_system/model/home/onboardingmodel.dart';
+
+import '../../core/constant/imageasset.dart';
 
 
 List<OnBoardingModel> onBoardingList = [

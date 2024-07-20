@@ -16,4 +16,9 @@ class AppColor {
   static Color blue = Colors.blue.shade700;
   static Color purple = Colors.purple;
   static Color lightblue = Colors.lightBlue;
+  static Color purple2 = Color.fromARGB(255, 32, 2, 69);
+  static Color purple3 = Color.fromARGB(255, 85, 25, 169);
+  static Color purple4 = Color.fromARGB(255, 132, 103, 208);
+  static Color purple5 = Color.fromARGB(255, 225, 200, 255).withOpacity(0.9);
+  static Color purple6 = Color.fromARGB(255, 110, 76, 205);
 }
