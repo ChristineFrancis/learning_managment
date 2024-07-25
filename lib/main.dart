@@ -8,6 +8,7 @@ import 'package:learning_managment_system/core/class/postRequest.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/routes.dart';
 import 'package:learning_managment_system/services/services.dart';
+import 'package:learning_managment_system/view/widget/Quiz/quest.dart';
 
 void main() async {
   Get.put(ApiPostRequest());

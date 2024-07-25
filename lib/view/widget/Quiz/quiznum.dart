@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:learning_managment_system/controller/Quiz/quiz_page_controller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/view/screen/quiz/before_quiz.dart';
 

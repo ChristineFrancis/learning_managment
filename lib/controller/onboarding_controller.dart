@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
-import 'package:learning_managment_system/data/datasource/static/static.dart';
+import 'package:learning_managment_system/data/static/static.dart';
+
 
 
 

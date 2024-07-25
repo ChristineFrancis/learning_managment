@@ -1,7 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:learning_managment_system/controller/Quiz/quiz_page_controller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/widget/Quiz/question.dart';
