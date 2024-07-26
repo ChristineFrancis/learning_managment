@@ -7,7 +7,6 @@ import 'package:learning_managment_system/model/home/recommendemodel.dart';
 import 'package:learning_managment_system/services/services.dart';
 
 class RecomendeController extends GetxController {
-  
   var isVisible1 = true.obs;
   var isVisible2 = false.obs;
 
@@ -22,10 +21,8 @@ class RecomendeController extends GetxController {
   int itemsDisplayed = 3;
 
   MyServices myServices = Get.find();
-  
-  // final String token = '4|BL5Gs1OPovK0UaiFdfxqr1SFltsddOBmfodtgVMYce9913dc';
-  final String url = AppUrl.recommended;
 
+  final String url = AppUrl.recommended;
 
   @override
   void onInit() {
@@ -42,7 +39,7 @@ class RecomendeController extends GetxController {
     print("yes");
     print(response.statusCode);
     if (response.statusCode == 200) {
-      print("true");
+      print("truerecoo");
       final Map<String, dynamic> parsed = json.decode(response.body);
       final List<dynamic> courseslist = parsed['recommended'];
 
@@ -51,7 +48,7 @@ class RecomendeController extends GetxController {
 
       addmoreRecommended();
     } else {
-      print("false");
+      print("falserecooo");
       throw Exception("failed");
     }
   }

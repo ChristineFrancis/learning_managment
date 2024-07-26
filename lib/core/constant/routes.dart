@@ -7,5 +7,6 @@ class AppRoute{
   static const String forgetPassword='/forgetPassword';
   static const String resetPassword='/resetPassword';
   static const String splash='/splash';
+   static const String category='/courses';
   
 }

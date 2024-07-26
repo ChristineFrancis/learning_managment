@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/bottom_navigation_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/view/screen/chatAi/ebefore_chat.dart';
+import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
 import 'package:learning_managment_system/view/screen/quiz/course_details.dart';
 
@@ -17,11 +18,10 @@ class Curved_NB extends StatelessWidget {
   final screens = [
     
    HomePage(),
-    CourseDetails(),
-   // Quiznum(),
-    Icon(Icons.home),
-    BeforeChatAi(),
-    Icon(Icons.home),
+  CourseDetails(),
+  FavoriteScreen(),
+  BeforeChatAi(),
+  Icon(Icons.home),
     
   ];
   final items= const [

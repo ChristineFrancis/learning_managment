@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning_managment_system/controller/Quiz/quiz_controller.dart';
 import 'package:learning_managment_system/core/class/statusrequest.dart';
@@ -47,6 +46,7 @@ class QuizPageControllerImp extends QuizPageController {
 
   @override
   getCourseDetails() async {
+  getCourseDetails() async {
     try {
       String? token = myServices.sharedPreferences.getString('access_token');
       Uri url = Uri.parse(AppUrl.quiz);
@@ -56,6 +56,9 @@ class QuizPageControllerImp extends QuizPageController {
       });
       print('tooooken $token');
 
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        jsonData = jsonDecode(response.body);
+        course = Course.fromJson(jsonData['course']);
       if (response.statusCode == 200 || response.statusCode == 201) {
         jsonData = jsonDecode(response.body);
         course = Course.fromJson(jsonData['course']);
