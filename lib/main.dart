@@ -6,6 +6,8 @@ import 'package:learning_managment_system/core/class/postRequest.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/routes.dart';
 import 'package:learning_managment_system/services/services.dart';
+import 'package:learning_managment_system/view/screen/Auth/login.dart';
+import 'package:learning_managment_system/view/screen/aboutUs/aboutUs.dart';
 import 'package:learning_managment_system/view/widget/Quiz/quest.dart';
 
 void main() async{
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: QuizPage(),
-     // home: MyWidget(),
+      //home: LoginPage(),
       initialRoute:AppRoute.splash ,
       getPages: routes,
     );

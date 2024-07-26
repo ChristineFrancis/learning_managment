@@ -53,7 +53,8 @@ class CustomCardHome extends StatelessWidget {
                           .categories[index].image!.isEmpty) {
                         return Image.asset(ImageAsset.logoImage);
                       } else {
-                        return Image.network(
+                        return 
+                        Image.network(
                           categoriesController.categories[index].image!,
                           alignment: Alignment.topCenter,
                         );

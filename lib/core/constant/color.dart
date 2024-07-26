@@ -16,4 +16,5 @@ class AppColor {
   static Color blue = Colors.blue.shade700;
   static Color purple = Colors.purple;
   static Color lightblue = Colors.lightBlue;
+  static const Color greenColor = Color(0xffA1D5AF);
 }

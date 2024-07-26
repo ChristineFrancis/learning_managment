@@ -30,7 +30,7 @@ class BeforeQuizPage extends StatelessWidget {
             //  const Text( "There is a timer will start as soon as " ,textAlign: TextAlign.center,
             //     style: TextStyle( color: AppColor.primaryColor , fontSize: 35 , fontWeight: FontWeight.w700 ,),),
             LottieBuilder.asset(ImageAsset.brforeQuizLottie2 , width: 200 ),
-               Padding(
+               const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Center(
                 child:Text( "It's a quiz time" ,textAlign: TextAlign.center,

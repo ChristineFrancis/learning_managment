@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
+import 'package:learning_managment_system/services/services.dart';
+import 'package:learning_managment_system/view/screen/curved_NavigationBar.dart';
 import 'package:learning_managment_system/view/screen/onboarding.dart';
 // ignore: depend_on_referenced_packages
 import 'package:page_transition/page_transition.dart';
@@ -14,6 +16,8 @@ class Splash_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyServices myServices = Get.find();
+     String? token = myServices.sharedPreferences.getString('access_token');
     return AnimatedSplashScreen(
         splash: Column(
           children: [
@@ -39,7 +43,7 @@ class Splash_Screen extends StatelessWidget {
         backgroundColor: AppColor.primaryColor,
         duration: 3000,
         pageTransitionType: PageTransitionType.bottomToTop,
-        nextScreen: OnBoarding()
+        nextScreen: token==null ? OnBoarding() : Curved_NB()
         );
   }
 }

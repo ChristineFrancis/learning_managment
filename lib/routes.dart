@@ -20,5 +20,5 @@ List<GetPage<dynamic>> routes=
   GetPage(name: AppRoute.navbar, page:()=> Curved_NB()),
   GetPage(name: AppRoute.forgetPassword, page:()=> const ForgetPasswordPage()),
   GetPage(name: AppRoute.resetPassword, page:()=> ResetPasswordPage()),
-  GetPage(name: AppRoute.splash, page:()=> Splash_Screen() ,  middlewares: [MyMiddleware() ]), 
+  GetPage(name: AppRoute.splash, page:()=> Splash_Screen() ), 
 ];

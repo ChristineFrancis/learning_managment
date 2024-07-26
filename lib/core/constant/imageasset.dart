@@ -6,6 +6,11 @@ class ImageAsset {
   static String logoImage = "$rootImage/idea_8343952.png";
   static String robot5Image = "$rootImage/1767206.png";
   static String exitFromQuiz = "$rootImage/expressionless.png";
+  static String aboutUs = "$rootImage/7866553.webp";
+  static String aboutUs2 = "$rootImage/10-Smart-Ways-to-Better-Team-Collaboration_What-is-Team-collaboration--.png";
+  static String aboutUs22 = "$rootImage/10-Smart-Ways-to-Better-Team-Collaboration_What-is-Team-collaboration.png";
+  static String contactUs = "$rootImage/1635790838025-Cross Team Collaboration.png";
+
 
 /////////lottie:
   static const String rootLottie='assets/lottie';

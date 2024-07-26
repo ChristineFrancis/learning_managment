@@ -14,4 +14,6 @@ class AppUrl {
   static String latest = "$baseUrl/home";
   static String home = "$baseUrl/courses?search=an";
   static String categories = "$baseUrl/home";
+  static String sendQuiz = "$baseUrl/quizzes";
+  static String contactUs = "$baseUrl/issues";
 }

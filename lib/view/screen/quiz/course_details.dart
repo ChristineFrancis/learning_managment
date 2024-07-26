@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_controller.dart';
 import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/view/screen/quiz/before_quiz.dart';
@@ -10,6 +11,7 @@ class CourseDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuizPageControllerImp controller = Get.put(QuizPageControllerImp());
+     QuizControllerImp quizControllerImp = Get.put(QuizControllerImp());
     return Scaffold(
       body:
       GetBuilder<QuizPageControllerImp>(
@@ -33,16 +35,22 @@ class CourseDetails extends StatelessWidget {
                         controller.course!.quizzes![quizNum].afterVideo == videosNum ) {
                       int currentQuizNum = quizNum;
                       quizNum++;
-                      return MaterialButton(
-                        onPressed: () async {
-                          await controller.fetchQuiz(currentQuizNum);
-                          Get.to(BeforeQuizPage());
-                        },
-                        child: Text(
-                          'Quiz ${controller.course!.quizzes![currentQuizNum].id}',
-                          style: TextStyle(color: AppColor.primaryColor, fontSize: 30),
-                        ),
-                      );
+ return MaterialButton(
+  onPressed: () async {
+    await controller.fetchQuiz(currentQuizNum);
+    quizControllerImp.setQuizNum(currentQuizNum);
+    quizControllerImp.setQuizId(controller.course!.quizzes![currentQuizNum].id);
+    Get.to(BeforeQuizPage());
+    // Get.to(() => BeforeQuizPage())!.then((_) {
+    //   quizControllerImp.clearState();
+    // });
+  },
+  child: Text(
+    'Quiz',
+    style: TextStyle(color: AppColor.primaryColor, fontSize: 30),
+  ),
+);
+
                     } else {videosNum++;
                       return Text(
                         'Video ${videosNum }',
