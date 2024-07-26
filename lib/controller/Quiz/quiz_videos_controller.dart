@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning_managment_system/controller/Quiz/quiz_controller.dart';
 import 'package:learning_managment_system/core/class/statusrequest.dart';
@@ -46,7 +49,6 @@ class QuizPageControllerImp extends QuizPageController {
 
   @override
   getCourseDetails() async {
-  getCourseDetails() async {
     try {
       String? token = myServices.sharedPreferences.getString('access_token');
       Uri url = Uri.parse(AppUrl.quiz);
@@ -70,10 +72,11 @@ class QuizPageControllerImp extends QuizPageController {
         print(response.body);
         print('Error status coooooode ${response.statusCode}');
       }
-    } catch (e) {
-      print('Exception: $e');
-    }
+    } 
   }
+  catch (e) {
+      print('Exception: $e');
+    }}
 
   @override
   fetchQuiz(int quizIndex) async {

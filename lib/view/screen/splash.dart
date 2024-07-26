@@ -7,6 +7,7 @@ import 'package:learning_managment_system/services/services.dart';
 import 'package:learning_managment_system/view/screen/curved_NavigationBar.dart';
 import 'package:learning_managment_system/view/screen/onboarding.dart';
 // ignore: depend_on_referenced_packages
+import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
