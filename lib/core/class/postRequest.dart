@@ -76,4 +76,36 @@ class ApiPostRequest {
       return const Left(StatusRequest.offlineFailure);
     }
   }
+
+
+  Future<Either<StatusRequest, Map>> putRequest(String url, Map data, String? token) async {
+    if (await checkInternet()) {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Authorization': token != null ? 'Bearer $token' : '',
+        'Content-Type': 'application/json',
+      };
+      print('Headers: $headers');
+
+      var response = await http.put(Uri.parse(url), body: jsonEncode(data), headers: headers);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      //if (response.statusCode == 200 || response.statusCode == 201 ) {
+        Map responseBody = jsonDecode(response.body);
+        print('Response from API: $responseBody');
+        return Right(responseBody);
+      // } else {
+      //   print('Error from API: ${response.statusCode}');
+      //   return const Left(StatusRequest.serverFailure);
+        
+      // }
+    } else {
+      return const Left(StatusRequest.offlineFailure);
+    }
+  }
+
+
+
+
 }

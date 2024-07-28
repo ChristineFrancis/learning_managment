@@ -8,6 +8,7 @@ import 'package:learning_managment_system/view/screen/curved_NavigationBar.dart'
 import 'package:learning_managment_system/view/screen/onboarding.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
@@ -22,10 +23,14 @@ class Splash_Screen extends StatelessWidget {
         splash: Column(
           children: [
             Expanded(
-                child: Image.asset(
-                  ImageAsset.logoImage,
-                width: 200,
-                height: 200,), ),
+                child:
+                 Lottie.asset(ImageAsset.splash3Lottie)
+                // Image.asset(
+                //   ImageAsset.logoImage,
+                // width: 200,
+                // height: 200,),
+                 ),
+            
             const SizedBox(
               height: 15,
             ),
@@ -40,7 +45,7 @@ class Splash_Screen extends StatelessWidget {
         ),
         splashIconSize: 200,
         splashTransition: SplashTransition.scaleTransition,
-        backgroundColor: AppColor.primaryColor,
+       // backgroundColor: AppColor.primaryColor,
         duration: 3000,
         pageTransitionType: PageTransitionType.bottomToTop,
         nextScreen: token==null ? OnBoarding() : Curved_NB()

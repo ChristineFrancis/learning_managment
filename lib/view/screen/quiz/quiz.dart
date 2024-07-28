@@ -9,7 +9,6 @@ import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/widget/Quiz/quest.dart';
-import 'package:learning_managment_system/view/widget/Quiz/question.dart';
 import 'package:learning_managment_system/view/widget/custom_widget/custom_button.dart';
 
 class QuizPage extends StatelessWidget {
@@ -17,7 +16,7 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuizPageControllerImp controllerImp = Get.put(QuizPageControllerImp());
+    QuizVideosControllerImp controllerImp = Get.put(QuizVideosControllerImp());
     QuizControllerImp quizControllerImp = Get.put(QuizControllerImp());
     RxBool timer=true.obs;
 

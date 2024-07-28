@@ -18,4 +18,20 @@ class SendAnswersQuizData {
       (ifRight) => ifRight,
     );
   }
+
+  putAnswers(String url,  int quiznum, List answers, String? token) async {
+    Map<String, dynamic> data = {
+      "quiz_number": quiznum,
+      "answers": answers
+    };
+    print('Request data: $data');
+    var response = await apiPostRequest.putRequest(url, data, token);
+    return response.fold(
+      (ifLeft) =>ifLeft,
+      (ifRight) => ifRight,
+    );
+  }
+
+
+
 }

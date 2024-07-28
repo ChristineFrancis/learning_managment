@@ -18,7 +18,8 @@ class Curved_NB extends StatelessWidget {
   final screens = [
     
    HomePage(),
-  CourseDetails(),
+   Icon(Icons.home),
+  //CourseDetails(),
   FavoriteScreen(),
   BeforeChatAi(),
   Icon(Icons.home),

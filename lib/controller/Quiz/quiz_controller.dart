@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
@@ -5,10 +7,12 @@ import 'package:learning_managment_system/core/class/statusrequest.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/core/constant/url.dart';
+import 'package:learning_managment_system/core/functions/checkinternet.dart';
 import 'package:learning_managment_system/core/functions/handlingdata.dart';
 import 'package:learning_managment_system/data/datasource/remote/quiz/send_answer_quizdata.dart';
 import 'package:learning_managment_system/model/course_details/quiz_model.dart';
 import 'package:learning_managment_system/services/services.dart';
+import 'package:http/http.dart' as http;
 
 abstract class QuizController extends GetxController {
   postQuiz();
@@ -17,7 +21,7 @@ abstract class QuizController extends GetxController {
 }
 
 class QuizControllerImp extends QuizController {
-  static QuizPageControllerImp quizPageControllerImp = Get.put(QuizPageControllerImp());
+  static QuizVideosControllerImp quizPageControllerImp = Get.put(QuizVideosControllerImp());
   SendAnswersQuizData sendAnswersQuizData = SendAnswersQuizData(Get.find());
   MyServices myServices = Get.find();
   Rx<StatusRequest> statusRequest = StatusRequest.none.obs;
@@ -161,24 +165,20 @@ class QuizControllerImp extends QuizController {
 
 @override
 postQuiz() async {
-  try {
+ try {
     String? name=myServices.sharedPreferences.getString('user name');
     getFinalListOfMaps();
-    if (answersList.isEmpty) {
-      //You should study harder😄
-      Get.defaultDialog(title: '$name,You should answer ', content: Text(''), titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25));
-      // Future.delayed(const Duration(seconds: 2), () {
-      //   if (Get.isDialogOpen ?? false) {
-      //     Get.back();
-      //   }
-      // });
-      // Future.delayed(const Duration(seconds: 2), () {
-      //   Get.toNamed(AppRoute.navbar);
-      // });
-    } 
-  else {
+    if (answersList.isEmpty)
+     {
+      Get.defaultDialog(
+        title:'$name,You should answer ',
+        content: Text(''),
+        titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25));
+     } 
+    else {
+    var response;
     String url;
-      statusRequest = StatusRequest.loading.obs;
+    statusRequest = StatusRequest.loading.obs;
      update();
       String? token = myServices.sharedPreferences.getString('access_token');
       int? preGrade = myServices.sharedPreferences.getInt(quizId.toString());
@@ -186,22 +186,26 @@ postQuiz() async {
       if(preGrade == null)
       { 
         url=AppUrl.sendQuiz;
-        print('Not taken befooore');
+        print('Quiz noot exists.......... the url: $url' );
+       response = await sendAnswersQuizData.postAnswers(url, quizId, quiznum, answersList, token);
       }
+    
       else {
-         url=AppUrl.sendQuiz;
-         print(' taken befooore');
-      }
+         url='${AppUrl.sendQuiz}/$quizId';
+         print('Quiz exists.......... the url: $url');
+         response = await sendAnswersQuizData.putAnswers(url, quiznum, answersList, token);
 
-      var response = await sendAnswersQuizData.postAnswers(url, quizId, quiznum, answersList, token);
+      }
       statusRequest.value = handlingData(response);
-       print('meeeeesege first ${response}');
       if (statusRequest.value == StatusRequest.success) {
-        if (response['message'] == "Congratiolations!") {
+        String message=response['message'].toString().trim();//Congratulations!
+        if (response['message'] == "Congratiolations!" || response['message'] == "Congrats! You've earned extra 100 points for completing this course." ||response['message'] =="Congratulations!" ) 
+        {
           myServices.sharedPreferences.setInt(quizId.toString(),response['grade'] );
+          print('case 1');
           Get.defaultDialog(
-            title: 'Congratulations 🎉 $name',
-            content: Text('Your grade is : ${response['grade'].toString()} % '),
+            title: '${response['message']} 🎉',
+            content: Text('$name,your grade is : ${response['grade'].toString()} % '),
             titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25),
             actions: [
               Row(
@@ -217,16 +221,18 @@ postQuiz() async {
               MaterialButton(
                   onPressed: () 
                {
-              Get.offAllNamed(AppRoute.navbar);
+                Get.back();
+                Get.back();
+                Get.back();
+             // Get.offAllNamed(AppRoute.navbar);
               }, child: Text('Go home', style: TextStyle(color: AppColor.grey),),)
 
               ],
             )],
           );
         } 
-         else if (response['message'] == "This record is already exists.")  {
-        print('meeeeesege ${response['message']}');
-       // statusRequest = StatusRequest.failure;
+         else if (message == "This record is already exists.")  {
+           print('case 2');
         Get.defaultDialog(
           title: '$name ,You have already passed the quiz 😄',
           
@@ -246,19 +252,64 @@ postQuiz() async {
               MaterialButton(
                   onPressed: () 
                {
-              Get.offAllNamed(AppRoute.navbar);
+                Get.back();
+                Get.back();
+                Get.back();
+              //Get.offAllNamed(AppRoute.navbar);
               }, child: Text('Go home', style: TextStyle(color: AppColor.grey),),)
 
               ],
             ),  
         );
-        statusRequest.value = StatusRequest.failure;
+        
+      }
+
+      else if(message == "Sorry! you got less than 60, you have to re do the quiz later."||message ==  "Sorry! You got less than 60. You have to redo the quiz later.")
+     {
+       print('case 3');
+       myServices.sharedPreferences.setInt(quizId.toString(),response['grade'] );
+         Get.defaultDialog(title: '$message', content: Text('$name,your grade is ${response['grade'].toString()} %.You should study harder😄'), titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25));
+         Future.delayed(const Duration(seconds:4), () {
+          if (Get.isDialogOpen ?? false) {
+                Get.back();
+                Get.back();
+                Get.back();
+            // Get.back();
+            // Get.offAllNamed(AppRoute.navbar);
+          }
+        });
+        // Future.delayed(const Duration(seconds: 2), () {
+        //   Get.toNamed(AppRoute.navbar);
+        // });
+      }
+
+      else
+      {
+         print('case default');
+         print(response['message']);
+        Get.defaultDialog(title: '${response['message']}', content: Text(' ${response['grade'].toString()} %.'), titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25));
+         Future.delayed(const Duration(seconds:4), () {
+          if (Get.isDialogOpen ?? false) {
+               Get.back();
+                Get.back();
+                Get.back();
+            // Get.back();
+            // Get.offAllNamed(AppRoute.navbar);
+          }
+        });
+        // Future.delayed(const Duration(seconds: 2), () {
+        //   Get.toNamed(AppRoute.navbar);
+        // });
+
       }
 
       } 
       
-    }
-  } catch (e) {
+    statusRequest.value = StatusRequest.failure;
+  }
+  }
+  
+   catch (e) {
 
     //statusRequest = StatusRequest.failure;
     print('Error: $e');

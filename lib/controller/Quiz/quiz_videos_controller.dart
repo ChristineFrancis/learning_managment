@@ -13,12 +13,12 @@ import 'package:learning_managment_system/core/functions/handlingdata.dart';
 import 'package:learning_managment_system/model/course_details/quiz_model.dart';
 import 'package:learning_managment_system/services/services.dart';
 
-abstract class QuizPageController extends GetxController {
+abstract class QuizVideosController extends GetxController {
   fetchQuiz(int quizIndex);
-  getCourseDetails();
+  getCourseDetails(int courseId);
 }
 
-class QuizPageControllerImp extends QuizPageController {
+class QuizVideosControllerImp extends QuizVideosController {
   static QuizControllerImp quizControllerImp = Get.put(QuizControllerImp());
   MyServices myServices = Get.find();
   Quizzes? quizzes;
@@ -32,7 +32,7 @@ class QuizPageControllerImp extends QuizPageController {
   void onInit() async {
     print('cooooorse details');
     super.onInit();
-    await getCourseDetails();
+    //await getCourseDetails();
     String? fullname = myServices.sharedPreferences.getString('full name');
     String? name = myServices.sharedPreferences.getString('user name');
     print(fullname);
@@ -48,11 +48,13 @@ class QuizPageControllerImp extends QuizPageController {
 
 
   @override
-  getCourseDetails() async {
+  getCourseDetails(int courseId) async {
     try {
       String? token = myServices.sharedPreferences.getString('access_token');
-      Uri url = Uri.parse(AppUrl.quiz);
-      var response = await http.get(url, headers: {
+      String url='${AppUrl.quiz}/$courseId';
+      print('course deeeeeeeetails url $url  ');
+      //Uri url = Uri.parse(AppUrl.quiz);
+      var response = await http.get(Uri.parse(url), headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token'
       });
@@ -80,10 +82,8 @@ class QuizPageControllerImp extends QuizPageController {
 
   @override
   fetchQuiz(int quizIndex) async {
-    // Clear previous quiz data
-    quizControllerImp.clearState();
-
-    quiznum.value = quizIndex + 1; // Adjusting to 1-based index
+   quizControllerImp.clearState();
+    quiznum.value = quizIndex + 1; 
     quizzes = Quizzes.fromJson(jsonData['course']['quizzes'][quizIndex]);
     quizControllerImp.setQuizNum(quiznum.value); // Ensure this is set correctly
     quizControllerImp.setQuizId(quizzes?.id);
@@ -96,19 +96,4 @@ class QuizPageControllerImp extends QuizPageController {
     print('Quiz Index: $quiznum');
     print(quizzes?.timer);
   }
-
-  // void putQuizNum(int quizIndex) {
-  //   print('putQuizNum $quizIndex');
-  //   quizControllerImp.setQuizNum(quizIndex + 1); // Adjusting to 1-based index
-  // }
-
-  // void putQuizId(int? quizId) {
-  //   quizControllerImp.setQuizId(quizId);
-  // }
-
-  // @override
-  // onSubmit() async {
-  //   print('from onSubmit');
-  //   await quizControllerImp.postQuiz();
-  // }
 }

@@ -1,6 +1,6 @@
 
 class AppUrl {
-  static String ip = '192.168.1.4';
+  static String ip = '192.168.1.102';
   static String baseUrl = 'http://$ip:8000/api/v1/students';
   static String signUpUrl = "$baseUrl/auth/register";
   static String loginUrl = "$baseUrl/auth/login";
@@ -10,7 +10,7 @@ class AppUrl {
   static String resendCodeRegister = "$baseUrl/auth/resend-code";
   static String forgetPasswordUrl = "$baseUrl/auth/forget-password";
   static String resetPassword = "$baseUrl/auth/reset-password";
-  static String quiz = "$baseUrl/courses/1";
+  static String quiz = "$baseUrl/courses";
   static String recommended = "$baseUrl/home";
   static String latest = "$baseUrl/home";
   static String categories = "$baseUrl/home";

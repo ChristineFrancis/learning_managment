@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/Courses/subcoursescontroller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/controller/favorite/favoritecontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
+import 'package:learning_managment_system/view/screen/quiz/course_details.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SubCourseWidget extends StatelessWidget {
@@ -12,6 +14,7 @@ class SubCourseWidget extends StatelessWidget {
 
   final SubCourseConImp controller = Get.put(SubCourseConImp());
   final FavouriteController controllerfav = Get.put(FavouriteController());
+  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
   SubCourseWidget({super.key, required this.subcourseInd});
 
   @override
@@ -27,7 +30,9 @@ class SubCourseWidget extends StatelessWidget {
                   controller.subcoursesList[index].isFavorite;
               return Obx(
                 () => InkWell(
-                    onTap: () {},
+                    onTap: ()async {
+                      await videosControllerImp.getCourseDetails(controller.subcoursesList[index].id!); 
+                      Get.to(CourseDetails()); },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 20),
