@@ -9,6 +9,7 @@ import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/routes.dart';
 import 'package:learning_managment_system/services/services.dart';
 import 'package:learning_managment_system/view/screen/Auth/login.dart';
+import 'package:learning_managment_system/view/screen/Splash/splash.dart';
 import 'package:learning_managment_system/view/screen/aboutUs/aboutUs.dart';
 import 'package:learning_managment_system/view/widget/Quiz/quest.dart';
 
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Exo2',
         useMaterial3: true,
       ),
-    
       initialRoute:AppRoute.splash ,
       getPages: routes,
     );

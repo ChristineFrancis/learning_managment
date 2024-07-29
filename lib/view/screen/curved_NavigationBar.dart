@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/bottom_navigation_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/screen/chatAi/ebefore_chat.dart';
 import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
@@ -54,23 +55,26 @@ class Curved_NB extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Obx(
-        () => IndexedStack(
-          children: screens,
-          index: bottomNavigationController.page_Index.value,
+    return WillPopScope(
+      onWillPop: alertExit,
+      child: Scaffold(
+        body: Obx(
+          () => IndexedStack(
+            children: screens,
+            index: bottomNavigationController.page_Index.value,
+          ),
         ),
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: AppColor.primaryColor,
-        color: AppColor.primaryColor,
-        animationDuration:const Duration(milliseconds: 500),
-        items: items,
-        index: 0,
-        onTap: (index) => {
-          bottomNavigationController.changeIndex(index)
-        },
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+          buttonBackgroundColor: AppColor.primaryColor,
+          color: AppColor.primaryColor,
+          animationDuration:const Duration(milliseconds: 500),
+          items: items,
+          index: 0,
+          onTap: (index) => {
+            bottomNavigationController.changeIndex(index)
+          },
+        ),
       ),
     );
   }
