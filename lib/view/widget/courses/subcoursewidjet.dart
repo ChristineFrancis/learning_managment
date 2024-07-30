@@ -27,7 +27,9 @@ class SubCourseWidget extends StatelessWidget {
                   controller.subcoursesList[index].isFavorite;
               return Obx(
                 () => InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 20),

@@ -168,7 +168,6 @@ class RecomendedHome extends StatelessWidget {
                                               fontWeight: FontWeight.w600))),
                                     ],
                                   ),
-                                   
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
