@@ -51,6 +51,11 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
     animationController?.dispose();
     super.dispose();
   }
+  @override
+  void onClose() {
+    animationController?.dispose();
+    super.onClose();
+  }
 
    @override
   void toggleAnimation() {

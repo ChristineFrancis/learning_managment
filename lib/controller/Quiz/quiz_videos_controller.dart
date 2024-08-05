@@ -10,21 +10,29 @@ import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/core/constant/url.dart';
 import 'package:learning_managment_system/core/functions/handlingdata.dart';
-import 'package:learning_managment_system/model/course_details/quiz_model.dart';
+import 'package:learning_managment_system/data/datasource/remote/enrollCourse/enrollCourseData.dart';
+import 'package:learning_managment_system/model/course_details/courseDetails_model.dart';
 import 'package:learning_managment_system/services/services.dart';
+import 'package:http/http.dart' as http;
 
 abstract class QuizVideosController extends GetxController {
   fetchQuiz(int quizIndex);
   getCourseDetails(int courseId);
+  enroll(int courseId);
+  unEnroll(int courseId);
 }
 
 class QuizVideosControllerImp extends QuizVideosController {
   static QuizControllerImp quizControllerImp = Get.put(QuizControllerImp());
+  EnrollCourseData enrollCourseData = EnrollCourseData(Get.find());
   MyServices myServices = Get.find();
+  StatusRequest statusRequest=StatusRequest.none;
+  bool seeContent=false;
   Quizzes? quizzes;
   Course? course;
+  Teacher? teacher;
   var jsonData;
-  List videos = ['1', '2', '3', '4', '5' , '6' , '7', '8' ];
+  bool enrollCourse=false;
   RxInt quiznum = 0.obs;
   RxInt quizid = 0.obs;
 
@@ -32,24 +40,26 @@ class QuizVideosControllerImp extends QuizVideosController {
   void onInit() async {
     print('cooooorse details');
     super.onInit();
-    //await getCourseDetails();
-    String? fullname = myServices.sharedPreferences.getString('full name');
     String? name = myServices.sharedPreferences.getString('user name');
-    print(fullname);
+    print('seeeeeeeeee content  $seeContent');
     print(name);
   }
-  // int getQuizNum() {
-  //   return quiznum.value;
+  // @override
+  // void onClose() {
+  //   enrollCourse=false;
+  //   print('Clooooooose Videos Quiiiiiiz Controller');
+  //   onDelete();
+  //   super.onClose();
   // }
-  // int? getQuizId() {
-  //   return quizid.value;
+  // @override
+  // void dispose() {
+  //   enrollCourse=false;
+  //   super.dispose();
   // }
-
-
-
+  
   @override
   getCourseDetails(int courseId) async {
-    try {
+    // try {
       String? token = myServices.sharedPreferences.getString('access_token');
       String url='${AppUrl.quiz}/$courseId';
       print('course deeeeeeeetails url $url  ');
@@ -66,6 +76,7 @@ class QuizVideosControllerImp extends QuizVideosController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         jsonData = jsonDecode(response.body);
         course = Course.fromJson(jsonData['course']);
+        teacher=Teacher.fromJson(jsonData['course']['teacher']);
         update();
         print(response.body);
         print('Quizzes: ${jsonData}');
@@ -76,16 +87,16 @@ class QuizVideosControllerImp extends QuizVideosController {
       }
     } 
   }
-  catch (e) {
-      print('Exception: $e');
-    }}
+  // catch (e) {
+  //     print('Exception getCourseDetails: $e');
+  //   }}
 
   @override
   fetchQuiz(int quizIndex) async {
    quizControllerImp.clearState();
     quiznum.value = quizIndex + 1; 
     quizzes = Quizzes.fromJson(jsonData['course']['quizzes'][quizIndex]);
-    quizControllerImp.setQuizNum(quiznum.value); // Ensure this is set correctly
+    quizControllerImp.setQuizNum(quiznum.value); 
     quizControllerImp.setQuizId(quizzes?.id);
     quizid.value=quizzes?.id ?? 0;
      print('QuizNummmmmm from Fetchhhhhhhhhhhhhhh ${quiznum.value}');
@@ -95,5 +106,70 @@ class QuizVideosControllerImp extends QuizVideosController {
     print('Quizzes: ${jsonData}');
     print('Quiz Index: $quiznum');
     print(quizzes?.timer);
+  }
+
+  // fectchVideo(int videoIndex)async
+  // {
+  //    videos=Videos.fromJson(jsonData['course']['videos'][videoIndex]);
+
+  // }
+
+
+  
+  @override
+  enroll(int courseId)async {
+    statusRequest = StatusRequest.loading;
+     print('seeeeeeeeee content before $seeContent');
+    seeContent=true;
+      update();
+      print('seeeeeeeeee content enroll $seeContent');
+
+      try {
+    String? token = myServices.sharedPreferences.getString('access_token');
+     var response = await enrollCourseData.enroll(courseId, token);
+         statusRequest = handlingData(response);
+        if (statusRequest == StatusRequest.success) 
+        {
+          if (response['message'] == "You've enrolled in this course successfully.")
+          { getCourseDetails(courseId);
+             Get.defaultDialog(title:response['message'] , content: Text('') , titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 20 ) );
+          }
+          else
+          {
+            Get.defaultDialog(title:response['message'] , content: Text('') , titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 20 ) );
+
+          }
+        }
+      }
+      catch(e){print('eroooooor enroll course $e');}
+      update();
+    
+  }
+  
+  @override
+  unEnroll(int courseId) async{
+    String? token = myServices.sharedPreferences.getString('access_token');
+    Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Authorization': token != null ? 'Bearer $token' : '',
+        'Content-Type': 'application/json',};
+    String url='${AppUrl.quiz}/$courseId';
+    try{
+    var response = await http.delete(Uri.parse(url) , headers: headers);
+    Map responseBody = jsonDecode(response.body);
+    print('deleeeeeeeeeeeete coooooooures $responseBody');
+    print('deleeeeeeeeeeeete coooooooures ${response.statusCode}');
+    if(response.statusCode==200)
+    { getCourseDetails(courseId);
+      Get.defaultDialog(title:responseBody['message'] , content: Text('') , titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 20 ) );
+
+    }
+    else
+    {
+      Get.defaultDialog(title:responseBody['message'] , content: Text('') , titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 20 ) );
+    }
+    }catch(e)
+    { print('eroooooor delete course $e');}
+    update();
   }
 }

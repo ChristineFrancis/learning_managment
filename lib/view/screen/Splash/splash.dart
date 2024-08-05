@@ -27,7 +27,7 @@ class Splash extends StatelessWidget {
        //fontFamily: 'KronaOne' ,
         fontSize: 45 ,
          fontWeight: FontWeight.bold
-    ),).animate().fade(begin: .0 , end: 1 , delay:1000.ms ).then(duration: 1000.ms).scale().shimmer(delay: 500.ms, duration: 1800.ms),
+    ),).animate().fade(begin: .1 , end: 1 , delay:1000.ms ).then(duration: 1500.ms).scale().then(duration: 320.ms).shimmer(duration: 1900.ms),
 
 Lottie.asset(ImageAsset.splashLottie),
         ],

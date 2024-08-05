@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
 import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
+import 'package:learning_managment_system/model/course_details/courseDetails_model.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
 import 'package:learning_managment_system/view/widget/home/latest.dart';
 
 class RecomendedHome extends StatelessWidget {
   RecomendedHome();
   final HomeController homeController = Get.put(HomeControllerImp());
   final RecomendeController controller = Get.put(RecomendeController());
+  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
 
   final LatestController controllerLatest = Get.put(LatestController());
 
@@ -92,7 +96,12 @@ class RecomendedHome extends StatelessWidget {
                         : const SizedBox.shrink();
                   }
                   return InkWell(
-                    onTap: () {},
+                    onTap: () async{
+                      await videosControllerImp.getCourseDetails(controller.allrecommendedCourses[index].id!); 
+                      print('recoooomended');
+                      print(controller.allrecommendedCourses[index].id!);
+                        Get.to(CourseDetailsPage());
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 8),

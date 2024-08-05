@@ -61,7 +61,11 @@ class QuizPage extends StatelessWidget {
                          CustomButton(
                           textButton: quizControllerImp.seeCorrectAnswers.value ? 'Go Home' : 'Submit',
                           onTap: ()  {
-                            Get.offAllNamed(AppRoute.navbar);
+                            Get.back();
+                            Get.back();
+                         //   Get.back();
+
+                            //Get.offAllNamed(AppRoute.navbar);
                           },
                         )
                         : CustomButton(

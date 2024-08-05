@@ -26,7 +26,8 @@ class Question extends StatelessWidget {
 
   Question({ required this.question, required this.answer1, required this.answer2, required this.answer3, required this.answer4, 
   required this.questionIndex, required this.questionid, required this.answer1id, required this.answer2id, required this.answer3id, required this.answer4id,
-   required this.isCorrect1, required this.isCorrect2, required this.isCorrect3, required this.isCorrect4, });
+   required this.isCorrect1, required this.isCorrect2, required this.isCorrect3, required this.isCorrect4, 
+   });
 
   @override
   Widget build(BuildContext context) {
