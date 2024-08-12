@@ -12,6 +12,7 @@ class ImageAsset {
   static String contactUs = "$rootImage/1635790838025-Cross Team Collaboration.png";
   static String appIcon="$rootImage/play_store_512.png";
   static String sadExit="$rootImage/unhappy_12561565.png";
+  static String noProfilePicture="$rootImage/Default_pfp.svg.png";
 
 
 /////////lottie:

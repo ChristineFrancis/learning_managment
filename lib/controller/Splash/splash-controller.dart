@@ -12,7 +12,7 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(const Duration(seconds: 6) ,
+    Future.delayed(const Duration(milliseconds: 5280) ,
      (){
       String? token = myServices.sharedPreferences.getString('access_token');
       if(token !=null)

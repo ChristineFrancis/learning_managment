@@ -8,7 +8,7 @@ import 'package:learning_managment_system/view/screen/chatAi/ebefore_chat.dart';
 import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
 import 'package:learning_managment_system/view/screen/profile/profilescreen.dart';
-import 'package:learning_managment_system/view/screen/quiz/course_details.dart';
+
 
 // ignore: must_be_immutable, camel_case_types
 class Curved_NB extends StatelessWidget {
@@ -31,8 +31,13 @@ class Curved_NB extends StatelessWidget {
       size: 25,
       color: Colors.white,
     ),
+    // Icon(
+    //   Icons.add,
+    //   size: 25,
+    //   color: Colors.white,
+    // ),
     Icon(
-      Icons.add,
+      Icons.person,
       size: 25,
       color: Colors.white,
     ),
@@ -46,11 +51,7 @@ class Curved_NB extends StatelessWidget {
       size: 25,
       color: Colors.white,
     ),
-    Icon(
-      Icons.person,
-      size: 25,
-      color: Colors.white,
-    ),
+    
   ];
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/Home/latestcontroller.dart';
 import 'package:learning_managment_system/controller/Home/recomendedcontroller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/model/course_details/courseDetails_model.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
 
 import '../../../core/constant/imageasset.dart';
 
@@ -12,6 +15,7 @@ class LatestHome extends StatelessWidget {
 
   final LatestController controller = Get.put(LatestController());
   final RecomendeController controller1 = Get.put(RecomendeController());
+  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,12 @@ class LatestHome extends StatelessWidget {
                 : const SizedBox.shrink();
           }
           return InkWell(
-            onTap: () {},
+            onTap: () async{
+              print('laaaaaaaaaaaaaatest ');
+              await videosControllerImp.getCourseDetails(controller.alllatest[index].id!); 
+              print(controller.alllatest[index].id!);
+               Get.to(CourseDetailsPage());
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 15.0, left: 4, bottom: 8),
               child: Container(

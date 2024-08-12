@@ -40,6 +40,11 @@ class CourseCountrollerImp extends CoursesController {
     isPlaying.toggle();
     isPlaying.value ? animationController?.forward() : animationController?.stop();
   }
+  @override
+  void onClose() {
+    animationController?.dispose();
+    super.onClose();
+  }
 
   var courseId;
   MyServices myServices = Get.find();

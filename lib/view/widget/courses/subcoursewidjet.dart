@@ -5,7 +5,8 @@ import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller
 import 'package:learning_managment_system/controller/favorite/favoritecontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
-import 'package:learning_managment_system/view/screen/quiz/course_details.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
+import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SubCourseWidget extends StatelessWidget {
@@ -33,9 +34,10 @@ class SubCourseWidget extends StatelessWidget {
 
               
                     onTap: ()async {
+    
                       await videosControllerImp.getCourseDetails(controller.subcoursesList[index].id!); 
-                      Get.to(CourseDetails()); },
-
+                     // Get.to(QuizVideos());
+                        Get.to(CourseDetailsPage());},
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 20),
