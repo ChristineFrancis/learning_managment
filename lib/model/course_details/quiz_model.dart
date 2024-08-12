@@ -101,6 +101,7 @@ class Choices {
       questionId: json['question_id'],
       choiceText: json['choice_text'],
       isCorrect: json['is_correct'],
+      //isCorrect: json['is_correct'] == 1, 
       createdFrom: json['created_from'],
     );
   }

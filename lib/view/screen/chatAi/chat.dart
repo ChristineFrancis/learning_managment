@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
+import 'package:learning_managment_system/services/services.dart';
 
 
 class Chat extends StatefulWidget {
@@ -14,6 +17,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   final TextEditingController _controller=TextEditingController();
+  MyServices myServices = Get.find();
 
   callGeminiModel()async
   {
@@ -23,6 +27,7 @@ class _ChatState extends State<Chat> {
       {
         setState(() {
            _messages.add(Message(text: _controller.text, isUser: true));
+          
             _controller.clear();
         });
        
@@ -36,6 +41,7 @@ class _ChatState extends State<Chat> {
      final response = await chat.sendMessage(content);
      setState(() {
        _messages.add(Message(text: response.text!, isUser: false));
+        
      });
     
     }
@@ -43,10 +49,7 @@ class _ChatState extends State<Chat> {
       print('eroor: $e');
     }
   }
- final List <Message> _messages=
-  [
-    
-  ];
+ final List <Message> _messages= [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

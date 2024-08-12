@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/Auth/signup_controller.dart';
+import 'package:learning_managment_system/controller/profile/profilecontroller.dart';
+import 'package:learning_managment_system/controller/profile/profilegetdata.dart';
 import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
@@ -17,6 +19,7 @@ class CustomAppBarHome extends StatelessWidget {
       required this.mycontroller});
   final SignUpControllerImp controller = Get.put(SignUpControllerImp());
   final HomeControllerImp homeController = Get.put(HomeControllerImp());
+  final ProfileControllerImp controllerpro = Get.put(ProfileControllerImp());
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,16 @@ class CustomAppBarHome extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "Hi ${homeController.name??''}",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600),
-                ),
+                child:
+                    GetBuilder<ProfileControllerImp>(builder: (controllerpro) {
+                  return Text(
+                    "Hi ${controllerpro.student.firstName}",
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600),
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),

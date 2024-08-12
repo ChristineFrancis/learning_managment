@@ -3,28 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/bottom_navigation_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/screen/chatAi/ebefore_chat.dart';
 import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
+import 'package:learning_managment_system/view/screen/profile/profilescreen.dart';
 import 'package:learning_managment_system/view/screen/quiz/course_details.dart';
-
 
 // ignore: must_be_immutable, camel_case_types
 class Curved_NB extends StatelessWidget {
-   Curved_NB({super.key});
+  Curved_NB({super.key});
   int page = 0;
-  BottomNavigationController bottomNavigationController = Get.put(BottomNavigationController());
+  BottomNavigationController bottomNavigationController =
+      Get.put(BottomNavigationController());
 
   final screens = [
-    
-   HomePage(),
-  CourseDetails(),
-  FavoriteScreen(),
-  BeforeChatAi(),
-  Icon(Icons.home),
-    
+    HomePage(),
+    Icon(Icons.home),
+    //CourseDetails(),
+    FavoriteScreen(),
+    BeforeChatAi(),
+    ProfilePage(),
   ];
-  final items= const [
+  final items = const [
     Icon(
       Icons.home,
       size: 25,
@@ -53,23 +54,24 @@ class Curved_NB extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Obx(
-        () => IndexedStack(
-          children: screens,
-          index: bottomNavigationController.page_Index.value,
+    return WillPopScope(
+      onWillPop: alertExit,
+      child: Scaffold(
+        body: Obx(
+          () => IndexedStack(
+            children: screens,
+            index: bottomNavigationController.page_Index.value,
+          ),
         ),
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: AppColor.primaryColor,
-        color: AppColor.primaryColor,
-        animationDuration:const Duration(milliseconds: 500),
-        items: items,
-        index: 0,
-        onTap: (index) => {
-          bottomNavigationController.changeIndex(index)
-        },
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+          buttonBackgroundColor: AppColor.primaryColor,
+          color: AppColor.primaryColor,
+          animationDuration: const Duration(milliseconds: 500),
+          items: items,
+          index: 0,
+          onTap: (index) => {bottomNavigationController.changeIndex(index)},
+        ),
       ),
     );
   }

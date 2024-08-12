@@ -10,9 +10,9 @@ class Quiznum extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuizPageControllerImp controllerImp = Get.put(QuizPageControllerImp());
+    QuizVideosControllerImp controllerImp = Get.put(QuizVideosControllerImp());
     return  Scaffold(
-       body: GetBuilder<QuizPageControllerImp>(
+       body: GetBuilder<QuizVideosControllerImp>(
           builder: (controller) {
             
             if (controller.course == null) {

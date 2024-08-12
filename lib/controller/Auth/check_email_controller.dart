@@ -141,7 +141,8 @@ abstract class CheckEmailController extends GetxController with GetTickerProvide
         {
           if (response['message'] == 'Code has been resent')
            {
-            Get.snackbar('DONE', 'your request has been received', snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColor.primaryColor, colorText: AppColor.whiteColor);
+            Get.snackbar('DONE', 'your request has been received',
+             snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColor.primaryColor, colorText: AppColor.whiteColor);
            }       
           else {
             Get.snackbar( 'Warning', response['message'] ?? 'An error occurred.');

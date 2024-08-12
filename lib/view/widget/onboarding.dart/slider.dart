@@ -35,11 +35,11 @@ class CustomSliderOnboarding extends GetView<OnBoardingControllerImp> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontFamily: 'PlayfairDisplay',
-                          fontSize: 15,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold),
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 13),
                   child: Container(
                       width: double.infinity,
                       alignment: Alignment.center,
@@ -49,7 +49,7 @@ class CustomSliderOnboarding extends GetView<OnBoardingControllerImp> {
                         style: const TextStyle(
                             fontFamily: 'PlayfairDisplay',
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: Color.fromARGB(255, 128, 127, 127)),
                       )),
                 )

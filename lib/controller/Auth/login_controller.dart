@@ -73,8 +73,14 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
           if (response['message'] == 'Student logged in successfully.')
            {
              String accessToken=response['access_token'];
+             String userName=response['Student']['first_name'];
+             String fullName=response['Student']['first_name'] +' '+response['Student']['last_name'] ;
               print('access_tokeeeeeeen login $accessToken');
+              print('first_nameeeeeeeeeee login $userName');
+               print('full_nameeeeeeeeeee login $fullName');
                myServices.sharedPreferences.setString('access_token' , accessToken );
+               myServices.sharedPreferences.setString('user name' , userName );
+               myServices.sharedPreferences.setString('full name' ,fullName );
               Get.defaultDialog(title: 'Welcome', content: Text(response['message']));
               Future.delayed(const Duration(seconds:2), () {
             if (Get.isDialogOpen ?? false) {

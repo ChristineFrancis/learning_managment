@@ -19,13 +19,13 @@ class RecomendedHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 2.0, right: 2, bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-                child: Padding(
+    Padding(
+    padding: const EdgeInsets.only(left: 2.0, right: 2, bottom: 10),
+      child: Row(
+       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+       children: [
+       Expanded(
+              child: Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: AnimatedButton(
                 height: 40,

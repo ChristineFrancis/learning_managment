@@ -6,14 +6,14 @@ import '../../model/home/onboardingmodel.dart';
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(
       image: ImageAsset.onboardigimage1,
-      body: "to FEKRA ",
-      text: "you new personal learning companion"),
+      body: "Welcome to Fekra!",
+      text: "Fekra is your personal knowledge hub."),
   OnBoardingModel(
       image: ImageAsset.onboardigimage2,
-      body: "Learn from anywhere",
-      text: "Get ready to explore and grow with us"),
+      body: "Explore Your Interests",
+      text: "Discover a world of courses tailored to your passions.\nFrom tech to art, there's something for everyone."),
   OnBoardingModel(
       image: ImageAsset.onboardigimage3,
-      body: "Learn easily!",
-      text: "Choose your favorite course and start learning")
+      body: " Learn Anytime, Anywhere",
+      text: "Enjoy flexible learning with our mobile app.\nStudy on the go and achieve your goals.")
 ];

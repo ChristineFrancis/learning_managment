@@ -8,7 +8,9 @@ import 'package:learning_managment_system/core/constant/imageasset.dart';
 Future<bool> alertExit()
 {
   Get.defaultDialog(
-    title: 'attention',
+    title: 'Are you really want to exit??',
+    titleStyle: TextStyle(fontSize: 25 , fontWeight: FontWeight.w600),
+    content: Image.asset(ImageAsset.sadExit , height: 170,) ,
     confirm: MaterialButton(onPressed: (){exit(0);} , child: const Text('confirm'),),
     cancel: MaterialButton(onPressed: (){Get.back();} , child: const Text('cancel'),),
   );

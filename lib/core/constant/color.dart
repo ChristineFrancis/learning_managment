@@ -8,6 +8,7 @@ class AppColor {
   static const Color secondaryColor = Color(0xff4B2C7E);
   static const Color whiteColor = Colors.white;
   static const Color violetColor = Color(0xffD6BFFC);
+  static const Color greenColor=Color(0xffB7DEBF);
   static Color? lightGreyColor = Colors.grey[300];
   static Color grey2 = Colors.grey.withOpacity(0.5);
   static Color orange = Colors.deepOrange.shade300;

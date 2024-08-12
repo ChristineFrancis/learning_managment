@@ -7,26 +7,6 @@ import 'package:learning_managment_system/core/functions/checkinternet.dart';
 
 
 class ApiPostRequest {
-  // Future<Either<StatusRequest, Map>> postRequestAuth(String url, Map data) async {
-  //   if (await checkInternet()) 
-  //   {
-  //     var response = await http.post(Uri.parse(url), body:jsonEncode(data),
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //       }, );
-  //     //print('response from crud ${response.body}');
-  //     Map responseBody = jsonDecode(response.body);
-  //     print('response from crud jsonDecode ${response.body}');
-      
-  //     return Right(responseBody);
-  //   } 
-  //   else
-  //    {
-  //     return const Left(StatusRequest.offlineFailure);
-  //   }
-  // }
-
-
   Future<Either<StatusRequest, Map>> postRequestWithImage( String url, Map data, File? imageFile ,String imageKey ,  String? token) async {
         if (await checkInternet()) 
     {
@@ -70,52 +50,62 @@ class ApiPostRequest {
   }
 
 
-  //  Future<Either<StatusRequest, Map>> postRequest(String url, Map data , Map<String,String> headers) async {
-  //   if (await checkInternet()) 
-  //   {
-      
-  //     var response = await http.post(Uri.parse(url), body:jsonEncode(data), headers: headers);
-  //     //print('response from crud ${response.body}');
-  //     Map responseBody = jsonDecode(response.body);
-  //     print('response from crud jsonDecode ${response.body}');
-      
-  //     return Right(responseBody);
-  //   } 
-  //   else
-  //    {
-  //     return const Left(StatusRequest.offlineFailure);
-  //   }
-  // }
+  Future<Either<StatusRequest, Map>> postRequest(String url, Map data, String? token) async {
+    if (await checkInternet()) {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Authorization': token != null ? 'Bearer $token' : '',
+        'Content-Type': 'application/json',
+      };
+      print('Headers: $headers');
 
+      var response = await http.post(Uri.parse(url), body: jsonEncode(data), headers: headers);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
 
-  Future<Either<StatusRequest, Map>> postRequest(String url, Map data , String? token) async {
-    if (await checkInternet()) 
-    { 
-      Map<String,String> headers ={'':''};
-      if (token==null)
-      {
-        headers={ 'Content-Type': 'application/json', };
-
-      }
-      else 
-      {
-        headers= {'Accept': 'application/json',
-        'Authorization': 'Bearer $token'
-       };
-      }
-      print('heeeaders $headers');
-      
-      var response = await http.post(Uri.parse(url), body:jsonEncode(data), headers: headers);
-      //print('response from crud ${response.body}');
-      Map responseBody = jsonDecode(response.body);
-      print('response from crud jsonDecode ${response.body}');
-      
-      return Right(responseBody);
-    } 
-    else
-     {
+      //if (response.statusCode == 200 || response.statusCode == 201 ) {
+        Map responseBody = jsonDecode(response.body);
+        print('Response from API: $responseBody');
+        return Right(responseBody);
+      // } else {
+      //   print('Error from API: ${response.statusCode}');
+      //   return const Left(StatusRequest.serverFailure);
+        
+      // }
+    } else {
       return const Left(StatusRequest.offlineFailure);
     }
   }
-}
 
+
+  Future<Either<StatusRequest, Map>> putRequest(String url, Map data, String? token) async {
+    if (await checkInternet()) {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Authorization': token != null ? 'Bearer $token' : '',
+        'Content-Type': 'application/json',
+      };
+      print('Headers: $headers');
+
+      var response = await http.put(Uri.parse(url), body: jsonEncode(data), headers: headers);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      //if (response.statusCode == 200 || response.statusCode == 201 ) {
+        Map responseBody = jsonDecode(response.body);
+        print('Response from API: $responseBody');
+        return Right(responseBody);
+      // } else {
+      //   print('Error from API: ${response.statusCode}');
+      //   return const Left(StatusRequest.serverFailure);
+        
+      // }
+    } else {
+      return const Left(StatusRequest.offlineFailure);
+    }
+  }
+
+
+
+
+}
