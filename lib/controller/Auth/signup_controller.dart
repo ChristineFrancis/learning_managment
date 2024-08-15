@@ -10,7 +10,8 @@ import 'package:learning_managment_system/core/functions/handlingdata.dart';
 import 'package:learning_managment_system/data/datasource/remote/auth/signupdata.dart';
 import 'package:learning_managment_system/services/services.dart';
 
-abstract class SignUpController extends GetxController with GetTickerProviderStateMixin { 
+abstract class SignUpController extends GetxController
+    with GetTickerProviderStateMixin {
   signUp();
   showPassword();
   showConfirmPassword();
@@ -38,18 +39,16 @@ class SignUpControllerImp extends SignUpController {
   bool isShowPassword = true;
   IconData passwordIconAuth = Icons.visibility_off_outlined;
   bool isShowConfirmPassword = true;
-  IconData confirmPasswordIconAuth = Icons.visibility_off_outlined; 
-  
+  IconData confirmPasswordIconAuth = Icons.visibility_off_outlined;
+
   // Photo
   Uint8List? image;
   File? myfile;
-  
+
   @override
   void onInit() {
     animationController = AnimationController(
-      vsync: this, 
-      duration: const Duration(milliseconds: 1000)
-    );
+        vsync: this, duration: const Duration(milliseconds: 1000));
     animationController?.repeat();
 
     email = TextEditingController();
@@ -65,6 +64,7 @@ class SignUpControllerImp extends SignUpController {
     animationController?.dispose();
     super.dispose();
   }
+
   @override
   void onClose() {
     animationController?.dispose();
@@ -74,7 +74,9 @@ class SignUpControllerImp extends SignUpController {
   @override
   void toggleAnimation() {
     isPlaying.toggle();
-    isPlaying.value ? animationController?.forward() : animationController?.stop();
+    isPlaying.value
+        ? animationController?.forward()
+        : animationController?.stop();
   }
 
   @override
@@ -85,14 +87,8 @@ class SignUpControllerImp extends SignUpController {
       update();
 
       try {
-        var response = await signupData.postData(
-          firstName.text, 
-          lastName.text, 
-          email.text, 
-          password.text, 
-          confirmPassword.text, 
-          myfile
-        );
+        var response = await signupData.postData(firstName.text, lastName.text,
+            email.text, password.text, confirmPassword.text, myfile);
         statusRequest = handlingData(response);
         if (statusRequest == StatusRequest.success) {
           if (response['message'] == 'Code has been sent') {
@@ -100,24 +96,26 @@ class SignUpControllerImp extends SignUpController {
             print('access_tokeeeeeeen sign up $accessToken');
             myServices.sharedPreferences.setString('access_token', accessToken);
             myServices.sharedPreferences.setString('user name', firstName.text);
-            myServices.sharedPreferences.setString('full name', '${firstName.text} ${lastName.text}');
-            String? fullname = myServices.sharedPreferences.getString('full name');
+            myServices.sharedPreferences
+                .setString('full name', '${firstName.text} ${lastName.text}');
+            String? fullname =
+                myServices.sharedPreferences.getString('full name');
             String? name = myServices.sharedPreferences.getString('user name');
             print(fullname);
             print(name);
-               
+
             Get.defaultDialog(
-              title: 'Welcome', 
-              content: Text(response['message']),
-              titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25)
-            );
+                title: 'Welcome',
+                content: Text(response['message']),
+                titleStyle: const TextStyle(
+                    color: AppColor.primaryColor, fontSize: 25));
             Future.delayed(const Duration(seconds: 2), () {
               if (Get.isDialogOpen ?? false) {
                 Get.back();
               }
             });
             Future.delayed(const Duration(seconds: 2), () {
-               animationController?.dispose();
+              animationController?.dispose();
               Get.toNamed(AppRoute.checkEmail);
             });
           } else if (response['message'] == 'Validation error') {
@@ -128,20 +126,22 @@ class SignUpControllerImp extends SignUpController {
               });
             }
             Get.defaultDialog(
-              title: response['message'],
-              content: Text(errorMessages.isNotEmpty ? errorMessages : 'An error occurred.'),
-              titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25)
-            );
+                title: response['message'],
+                content: Text(errorMessages.isNotEmpty
+                    ? errorMessages
+                    : 'An error occurred.'),
+                titleStyle: const TextStyle(
+                    color: AppColor.primaryColor, fontSize: 25));
             statusRequest = StatusRequest.failure;
           } else {
             Get.defaultDialog(
-              title: 'Warning',
-              content: Text(response['message'] ?? 'An error occurred.'),
-              titleStyle: const TextStyle(color: AppColor.primaryColor, fontSize: 25)
-            );
+                title: 'Warning',
+                content: Text(response['message'] ?? 'An error occurred.'),
+                titleStyle: const TextStyle(
+                    color: AppColor.primaryColor, fontSize: 25));
             statusRequest = StatusRequest.failure;
           }
-        } 
+        }
       } catch (e) {
         statusRequest = StatusRequest.failure;
         print('An errooooooooooooooooooooooooooor occurred: $e');
@@ -153,17 +153,21 @@ class SignUpControllerImp extends SignUpController {
   @override
   void showPassword() {
     isShowPassword = !isShowPassword;
-    passwordIconAuth = isShowPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
+    passwordIconAuth = isShowPassword
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
     update();
   }
-  
+
   @override
   void showConfirmPassword() {
     isShowConfirmPassword = !isShowConfirmPassword;
-    confirmPasswordIconAuth = isShowConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
+    confirmPasswordIconAuth = isShowConfirmPassword
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
     update();
   }
-  
+
   @override
   void galleryorCamera() {
     Get.bottomSheet(
@@ -176,14 +180,19 @@ class SignUpControllerImp extends SignUpController {
           children: [
             const Padding(
               padding: EdgeInsets.all(15.0),
-              child: Text('Choose:', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: AppColor.primaryColor)),
+              child: Text('Choose:',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.primaryColor)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 MaterialButton(
                   onPressed: () async {
-                    XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+                    XFile? xfile = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
                     if (xfile == null) return;
                     myfile = File(xfile.path);
                     image = File(xfile.path).readAsBytesSync();
@@ -191,15 +200,19 @@ class SignUpControllerImp extends SignUpController {
                     Get.back();
                   },
                   child: const Column(
-                    children: [ 
-                      Icon(Icons.image_outlined, size: 40, color: AppColor.primaryColor),
-                      Text('Gallery', style: TextStyle(fontSize: 18, color: AppColor.primaryColor)),
+                    children: [
+                      Icon(Icons.image_outlined,
+                          size: 40, color: AppColor.primaryColor),
+                      Text('Gallery',
+                          style: TextStyle(
+                              fontSize: 18, color: AppColor.primaryColor)),
                     ],
                   ),
                 ),
                 MaterialButton(
                   onPressed: () async {
-                    XFile? xfile = await ImagePicker().pickImage(source: ImageSource.camera);
+                    XFile? xfile = await ImagePicker()
+                        .pickImage(source: ImageSource.camera);
                     if (xfile == null) return;
                     myfile = File(xfile.path);
                     image = File(xfile.path).readAsBytesSync();
@@ -207,9 +220,12 @@ class SignUpControllerImp extends SignUpController {
                     Get.back();
                   },
                   child: const Column(
-                    children: [ 
-                      Icon(Icons.camera_alt_outlined, size: 40, color: AppColor.primaryColor),
-                      Text('Camera', style: TextStyle(fontSize: 18, color: AppColor.primaryColor)),
+                    children: [
+                      Icon(Icons.camera_alt_outlined,
+                          size: 40, color: AppColor.primaryColor),
+                      Text('Camera',
+                          style: TextStyle(
+                              fontSize: 18, color: AppColor.primaryColor)),
                     ],
                   ),
                 ),
@@ -220,9 +236,12 @@ class SignUpControllerImp extends SignUpController {
                     Get.back();
                   },
                   child: const Column(
-                    children: [ 
-                      Icon(Icons.delete_outline, size: 40, color: AppColor.primaryColor),
-                      Text('Remove', style: TextStyle(fontSize: 18, color: AppColor.primaryColor)),
+                    children: [
+                      Icon(Icons.delete_outline,
+                          size: 40, color: AppColor.primaryColor),
+                      Text('Remove',
+                          style: TextStyle(
+                              fontSize: 18, color: AppColor.primaryColor)),
                     ],
                   ),
                 ),

@@ -37,20 +37,14 @@ class ProfileUpdteController extends GetxController {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
     emailController = TextEditingController();
+
     firstNameError.value = null;
     lastNameError.value = null;
     emailError.value = null;
+    //  update();
     super.onInit();
   }
 
-  // Future<void> pickAndUploadImage(ImageSource source) async {
-  //   final pickedFile = await ImagePicker().pickImage(source: source);
-  //   if (pickedFile != null) {
-  //     myfile = File(pickedFile.path);
-  //     update();
-  //     await updatedUser(F, L, E, myfile, imageKey);
-  //   }
-  // }
   File? myfile;
   Uint8List? image;
   bool hasError = false;
@@ -64,8 +58,8 @@ class ProfileUpdteController extends GetxController {
       String? token = myServices.sharedPreferences.getString('access_token');
       var request =
           http.MultipartRequest('POST', Uri.parse(AppUrl.updateprofile));
-      print('mmmmmm$myfile');
 
+      //   myServices.sharedPreferences.setString('first_name', firstName.text);
       if (isFirstNameModified.value) {
         if (firstName.isEmpty) {
           firstNameError.value = 'First name cannot be empty';
@@ -77,7 +71,6 @@ class ProfileUpdteController extends GetxController {
       }
 
       if (isLastNameModified.value) {
-        // data['last_name'] = lastNameController.text.trim();
         if (lastName.isEmpty) {
           lastNameError.value = 'Last name cannot be empty';
           hasError = true;
@@ -113,18 +106,18 @@ class ProfileUpdteController extends GetxController {
       data.forEach((key, value) {
         request.fields[key] = value;
       });
-
+      //  if (isimageModified.value) {
       if (myfile != null) {
         request.files
             .add(await http.MultipartFile.fromPath('image', myfile.path));
 
         print('imaggggggggggggg');
-        isimageModified.value == true;
+        // isimageModified.value == true;
         update();
-        //controllerImp.fetchProfile();
+      } else {
+        print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
       }
-
-      // contentType: MediaType('image', basename(imageFile.path)),
+      //  }
 
       if (hasError) {
         return print('eroooooooooooooooor');
@@ -136,14 +129,6 @@ class ProfileUpdteController extends GetxController {
         // Handle successful response
         print('Profile updated successfully');
         Get.snackbar('Success', 'Profile updated successfully');
-        //  isimageModified.value = true;
-        // controllerImp.fetchProfile();
-        // print(request);
-        // print(data);
-        // print(response);
-
-        //   print( request.fields[key] = value);
-        //   print(jsonData);
 
         update();
         print("cccccccccccccccccccccccccc$myfile");
@@ -152,13 +137,11 @@ class ProfileUpdteController extends GetxController {
         print('Failed to update profile');
         //  Get.snackbar('Error', 'Failed to update profile');
       }
-    }
-    // catch (e) {
-    //   // Handle any exceptions
-    //   print('Exception: $e');
-    //   Get.snackbar('Error', 'An error occurred while updating profile');
-    // }
-    finally {
+    } catch (e) {
+      // Handle any exceptions
+      print('Exception: $e');
+      Get.snackbar('Error', 'An error occurred while updating profile');
+    } finally {
       isFirstNameModified.value = false;
       isLastNameModified.value = false;
       isEmailModified.value = false;
@@ -194,15 +177,20 @@ class ProfileUpdteController extends GetxController {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 MaterialButton(
+                  onHighlightChanged: (value) {
+                    isimageModified.value = true;
+                  },
                   onPressed: () async {
                     XFile? xfile = await ImagePicker()
                         .pickImage(source: ImageSource.gallery);
                     if (xfile == null) return;
 
                     myfile = File(xfile.path);
+
                     image = File(xfile.path).readAsBytesSync();
-                    update();
                     isimageModified.value == true;
+                    update();
+
                     print(myfile);
                     // print('vvvvvvv$image');
 
@@ -224,6 +212,9 @@ class ProfileUpdteController extends GetxController {
                   ),
                 ),
                 MaterialButton(
+                  onHighlightChanged: (value) {
+                    isimageModified.value = true;
+                  },
                   onPressed: () async {
                     XFile? xfile = await ImagePicker()
                         .pickImage(source: ImageSource.camera);
@@ -250,6 +241,7 @@ class ProfileUpdteController extends GetxController {
                 MaterialButton(
                   onPressed: () {
                     image = null;
+                    //isimageModified.value = false;
                     update();
                     Get.back();
                   },
@@ -289,7 +281,6 @@ class ProfileUpdteController extends GetxController {
       }
     } finally {}
   }
-  
 }
 
 bool isValidEmail(String email) {

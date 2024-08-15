@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 class FavoriteModel {
   int? id;
   String? name;
@@ -52,7 +54,7 @@ class Pivot {
   int? courseId;
   int? isFavorite;
   int? studentHasEnrolled;
-  int? progress;
+  double? progress;
 
   Pivot(
       {this.userId,
@@ -66,7 +68,7 @@ class Pivot {
     courseId = json['course_id'];
     isFavorite = json['is_favorite'];
     studentHasEnrolled = json['student_has_enrolled'];
-    progress = json['progress'];
+    progress = json['progress'].toDouble();
   }
 }
 

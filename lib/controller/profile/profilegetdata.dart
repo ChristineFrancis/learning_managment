@@ -12,7 +12,7 @@ import 'package:learning_managment_system/services/services.dart';
 abstract class ProfileController extends GetxController {
   final http.Client client = http.Client();
   // final ProfileUpdteController controller = Get.put(ProfileUpdteController());
-  var enrolled = <EnrolledCourses>[].obs;
+
   // var profileModel = <ProfileModel>[].obs;
   // ProfileModel? profileModel;
 }
@@ -22,6 +22,7 @@ class ProfileControllerImp extends ProfileController {
   //var student= <Student>[].obs;
   Student student = Student();
   var studentmm = Student().obs;
+  var enrolled = <EnrolledCourses>[].obs;
   // var profile = <Student>[].obs;
 
   @override
@@ -29,6 +30,7 @@ class ProfileControllerImp extends ProfileController {
     fetchProfile();
 
     super.onInit();
+    update();
   }
 
   void fetchProfile() async {
@@ -43,6 +45,7 @@ class ProfileControllerImp extends ProfileController {
       print("profile");
       print(response.statusCode);
       print(response);
+      update();
       if (response.statusCode == 200) {
         print(response);
 

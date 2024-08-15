@@ -27,7 +27,7 @@ class Course {
   int? price;
   int? isFavorite;
   int? studentHasEnrolled;
-  int? progress;
+  double? progress;
   String? createdFrom;
   String? image;
   List<Videos>? videos;
@@ -61,7 +61,7 @@ class Course {
     price = json['price'];
     isFavorite = json['is_favorite'];
     studentHasEnrolled = json['student_has_enrolled'];
-    progress = json['progress'];
+    progress = json['progress'].toDouble();
     createdFrom = json['created_from'];
     image = json['image'];
     if (json['videos'] != null) {

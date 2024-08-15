@@ -6,6 +6,7 @@ import 'package:learning_managment_system/controller/profile/profilegetdata.dart
 import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
+import 'package:learning_managment_system/services/services.dart';
 
 class CustomAppBarHome extends StatelessWidget {
   final void Function()? onPressedSearch;
@@ -23,6 +24,9 @@ class CustomAppBarHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyServices myServices = Get.find();
+    //String? name = myServices.sharedPreferences.getString('first_name');
+
     return Container(
       padding: const EdgeInsets.only(top: 0, left: 5, bottom: 15),
       decoration: BoxDecoration(
@@ -47,7 +51,7 @@ class CustomAppBarHome extends StatelessWidget {
                 child:
                     GetBuilder<ProfileControllerImp>(builder: (controllerpro) {
                   return Text(
-                    "Hi ${controllerpro.student.firstName}",
+                    "Hi ${controllerpro.student.firstName ?? homeController.name ?? ''}",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 32,

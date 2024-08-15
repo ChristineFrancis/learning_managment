@@ -15,7 +15,8 @@ class LatestHome extends StatelessWidget {
 
   final LatestController controller = Get.put(LatestController());
   final RecomendeController controller1 = Get.put(RecomendeController());
-  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
+  final QuizVideosControllerImp videosControllerImp =
+      Get.put(QuizVideosControllerImp());
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,12 @@ class LatestHome extends StatelessWidget {
                 : const SizedBox.shrink();
           }
           return InkWell(
-            onTap: () async{
+            onTap: () async {
               print('laaaaaaaaaaaaaatest ');
-              await videosControllerImp.getCourseDetails(controller.alllatest[index].id!); 
+              await videosControllerImp
+                  .getCourseDetails(controller.alllatest[index].id!);
               print(controller.alllatest[index].id!);
-               Get.to(CourseDetailsPage());
+              Get.to(CourseDetailsPage());
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 15.0, left: 4, bottom: 8),
@@ -142,24 +144,12 @@ class LatestHome extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: Obx(() {
-                        if (controller.alllatest[index].image!.isEmpty) {
-                          return Image.asset(
-                            ImageAsset.logoImage,
-                            height: 150,
-                            width: 100,
-                          );
-                        } else {
-                          return Image.network(
-                            controller.alllatest[index].image!,
-                            height: 70,
-                            width: 20,
-                            alignment: Alignment.topCenter,
-                          );
-                        }
-                      }),
-                    ),
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Image.asset(
+                          ImageAsset.logoImage,
+                          height: 150,
+                          width: 100,
+                        )),
                   ],
                 ),
               ),

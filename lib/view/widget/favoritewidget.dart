@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/controller/favorite/favoritecontroller.dart';
 import 'package:learning_managment_system/controller/favorite/myfavorite.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
 
 import '../../controller/Courses/subcoursescontroller.dart';
 import '../../core/constant/imageasset.dart';
@@ -14,6 +16,8 @@ class FavoriteWidget extends GetView<MyFavoriteController> {
   final SubCourseConImp controllercourse = Get.put(SubCourseConImp());
   final FavouriteController favouriteController =
       Get.put(FavouriteController());
+  final QuizVideosControllerImp videosControllerImp =
+      Get.put(QuizVideosControllerImp());
 
   FavoriteWidget({
     super.key,
@@ -29,7 +33,13 @@ class FavoriteWidget extends GetView<MyFavoriteController> {
           itemBuilder: (context, index) {
             if (index >= 0 && index < controller.favorite.length) {
               return InkWell(
-                  onTap: () {},
+                  onTap: ()
+                   async {
+                    await videosControllerImp.getCourseDetails(
+                        myFavoriteController.favorite[index].id!);
+
+                    Get.to(CourseDetailsPage());
+                  },
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 20.0, left: 4, bottom: 20),

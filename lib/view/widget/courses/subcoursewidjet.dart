@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Courses/coursecontroller.dart';
 import 'package:learning_managment_system/controller/Courses/subcoursescontroller.dart';
 import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/controller/favorite/favoritecontroller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
 import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
-import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SubCourseWidget extends StatelessWidget {
@@ -15,29 +15,32 @@ class SubCourseWidget extends StatelessWidget {
 
   final SubCourseConImp controller = Get.put(SubCourseConImp());
   final FavouriteController controllerfav = Get.put(FavouriteController());
-  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
+  final QuizVideosControllerImp videosControllerImp =
+      Get.put(QuizVideosControllerImp());
   SubCourseWidget({super.key, required this.subcourseInd});
+  //controller.fetchCourses(subcourseInd);
 
   @override
   Widget build(BuildContext context) {
     Get.put(FavouriteController());
-    controller.fetchCourses(subcourseInd);
-    return Obx(
-      () => ListView.builder(
+    //controller.fetchCourses(subcourseInd);
+    Get.put(SubCourseConImp());
+
+    return GetBuilder<SubCourseConImp>(
+      builder: (controller) => ListView.builder(
           itemCount: controller.subcoursesList.length,
           itemBuilder: (context, index) {
             if (index >= 0 && index < controller.subcoursesList.length) {
               controllerfav.isFavourite[controller.subcoursesList[index].id] =
                   controller.subcoursesList[index].isFavorite;
-              return Obx(
-                () => InkWell(
-
-              
-                    onTap: ()async {
-    
-                      await videosControllerImp.getCourseDetails(controller.subcoursesList[index].id!); 
-                     // Get.to(QuizVideos());
-                        Get.to(CourseDetailsPage());},
+              return GetBuilder<SubCourseConImp>(
+                builder: (controller) => InkWell(
+                    onTap: () async {
+                      await videosControllerImp.getCourseDetails(
+                          controller.subcoursesList[index].id!);
+                      // Get.to(QuizVideos());
+                      Get.to(CourseDetailsPage());
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 4, bottom: 20),
@@ -124,29 +127,32 @@ class SubCourseWidget extends StatelessWidget {
                             ),
                             Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Obx(() {
-                                  if (controller.subcoursesList[index]
-                                          .studentHasEnrolled ==
-                                      1) {
-                                    return CircularPercentIndicator(
-                                      radius: 45,
-                                      lineWidth: 12,
-                                      backgroundColor: AppColor.purple5,
-                                      progressColor: AppColor.primaryColor,
-                                      animation: true,
-                                      animationDuration: duration,
-                                      percent: controller
-                                          .subcoursesList[index].progress
-                                          .toDouble(),
-                                      center: Text(
-                                          '${controller.subcoursesList[index].progress}%'),
-                                      circularStrokeCap:
-                                          CircularStrokeCap.round,
-                                    );
-                                  } else {
-                                    return const SizedBox();
-                                  }
-                                })),
+                                child: GetBuilder<SubCourseConImp>(
+                                  builder: (controller) {
+                                    if (controller.subcoursesList[index]
+                                            .studentHasEnrolled ==
+                                        1) {
+                                      return CircularPercentIndicator(
+                                        radius: 45,
+                                        lineWidth: 12,
+                                        backgroundColor: AppColor.purple5,
+                                        progressColor: AppColor.primaryColor,
+                                        animation: true,
+                                        animationDuration: duration,
+                                        percent: controller
+                                                .subcoursesList[index]
+                                                .progress /
+                                            100.toDouble(),
+                                        center: Text(
+                                            '${controller.subcoursesList[index].progress}%'),
+                                        circularStrokeCap:
+                                            CircularStrokeCap.round,
+                                      );
+                                    } else {
+                                      return const SizedBox();
+                                    }
+                                  },
+                                )),
                           ],
                         ),
                       ),
@@ -154,8 +160,6 @@ class SubCourseWidget extends StatelessWidget {
               );
             } else {
               return Image.asset(ImageAsset.loadingLottie);
-
-              
             }
           }),
     );

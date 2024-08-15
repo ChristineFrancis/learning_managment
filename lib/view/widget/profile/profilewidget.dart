@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,7 +5,9 @@ import 'package:learning_managment_system/controller/Auth/login_controller.dart'
 
 import 'package:learning_managment_system/controller/profile/profilegetdata.dart';
 import 'package:learning_managment_system/controller/profile/profilecontroller.dart';
+import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
+import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/view/screen/Auth/login.dart';
 import 'package:learning_managment_system/view/screen/aboutUs/aboutUs.dart';
 import 'package:learning_managment_system/view/screen/profile/editprofile.dart';
@@ -19,6 +19,7 @@ class ProfilePage2 extends StatelessWidget {
   final LoginControllerImp loginController = Get.put(LoginControllerImp());
   final ProfileUpdteController controllerpro =
       Get.put(ProfileUpdteController());
+  final HomeControllerImp homeController = Get.put(HomeControllerImp());
 
   String? imageKey;
   String? F;
@@ -30,16 +31,17 @@ class ProfilePage2 extends StatelessWidget {
       //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: AppColor.whiteColor,
       title: title,
+      titleStyle: TextStyle(color: Colors.black),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             content,
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.black),
           ),
           Text(
             content1,
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.black),
           ),
         ],
       ),
@@ -54,7 +56,7 @@ class ProfilePage2 extends StatelessWidget {
       //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: AppColor.whiteColor,
       title: title,
-      titleStyle: TextStyle(fontSize: 18),
+      titleStyle: TextStyle(fontSize: 18, color: Colors.black),
       titlePadding: EdgeInsets.all(20),
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,7 +64,7 @@ class ProfilePage2 extends StatelessWidget {
           TextButton(
               onPressed: () {
                 loginController.logout();
-                Get.to(() => LoginPage());
+               Get.offAllNamed(AppRoute.splash);
               },
               child: Text(
                 'Yes',

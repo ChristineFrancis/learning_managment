@@ -26,6 +26,7 @@ class CoursesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //controller.fetchCourses(0);
     return GetBuilder<CourseCountrollerImp>(
       builder: (controller) => Scaffold(
           body: Stack(
@@ -53,7 +54,8 @@ class CoursesScreen extends StatelessWidget {
                 SizedBox(
                   child: CustomAppBar(
                     onpressed: () {
-                      Get.to(() => Curved_NB());
+                      //  Get.to(() => Curved_NB());
+                      Get.back();
                     },
                     text: 'Choose what \n you like!',
                     mycontroller: homeController.search!,
@@ -72,15 +74,17 @@ class CoursesScreen extends StatelessWidget {
                         child: Column(children: [
                           SizedBox(
                               height: 500,
-                              child: Obx(() {
-                                if (controller.coursesList.isEmpty) {
-                                  return const CircleAvatar();
-                                } else {
-                                  return CourseWidget(
-                                    courseId: courseId,
-                                  );
-                                }
-                              }))
+                              child:
+                                  //  Obx(() {
+                                  // if (controller.coursesList.isEmpty) {
+                                  //   return const CircleAvatar();
+                                  // } else {
+                                  CourseWidget(
+                                courseId: courseId,
+                              )
+                              // }
+                              //     })
+                              )
                         ]))
                     : ListSubCoursesSearch(
                         listdataModel: homeController.listdata,

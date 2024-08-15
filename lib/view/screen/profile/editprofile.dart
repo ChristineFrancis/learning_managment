@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:learning_managment_system/controller/profile/profilecontroller.dart';
 import 'package:learning_managment_system/controller/profile/profilegetdata.dart';
+import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/view/widget/custom_widget/custom_button.dart';
 
@@ -13,9 +15,11 @@ class ProfileUpdateScreen extends StatelessWidget {
   final ProfileControllerImp controller = Get.put(ProfileControllerImp());
   final ProfileUpdteController controllerpro =
       Get.put(ProfileUpdteController());
+  final HomeControllerImp homeController = Get.put(HomeControllerImp());
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchProfile();
     final TextEditingController textController =
         TextEditingController(text: controller.student.firstName);
 
@@ -30,8 +34,7 @@ class ProfileUpdateScreen extends StatelessWidget {
         if (controllerpro.isFirstNameModified.value ||
             controllerpro.isLastNameModified.value ||
             controllerpro.isEmailModified.value ||
-            controllerpro.isimageModified.value
-           ) {
+            controllerpro.isimageModified.value) {
           return await Get.dialog(
                 AlertDialog(
                   title: Text('Unsaved Changes'),
@@ -62,8 +65,9 @@ class ProfileUpdateScreen extends StatelessWidget {
                             controllerpro.myfile,
                             controllerpro.imageKey);
                         //حفظ التغييرات
-                        Get.back(result: true);
+
                         controller.fetchProfile();
+                        Get.back(result: true);
                         // الخروج بعد الحفظ
                       },
                       child: Text('Save'),
@@ -98,8 +102,8 @@ class ProfileUpdateScreen extends StatelessWidget {
                       ),
                     ],
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(150),
-                        bottomRight: Radius.circular(150)),
+                        bottomLeft: Radius.circular(125),
+                        bottomRight: Radius.circular(125)),
 
                     // color: Colors.deepPurple.shade100, // لون الحواف
                     // width: 2), // عرض الحواف
@@ -146,6 +150,7 @@ class ProfileUpdateScreen extends StatelessWidget {
                               child: IconButton(
                                 onPressed: () {
                                   controllerpro.galleryorCamera();
+                                  // controllerpro.isimageModified.value == true;
                                 },
                                 icon: Icon(Icons.add_a_photo,
                                     size: 33, color: AppColor.primaryColor),
@@ -174,6 +179,7 @@ class ProfileUpdateScreen extends StatelessWidget {
                               child: IconButton(
                                 onPressed: () {
                                   controllerpro.galleryorCamera();
+                                  // controllerpro.isimageModified.value == true;
                                 },
                                 icon: Icon(Icons.add_a_photo,
                                     size: 33, color: AppColor.primaryColor),

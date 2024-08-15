@@ -41,12 +41,9 @@ class MyFavoriteController extends GetxController {
       var jsonData = jsonDecode(response.body);
       favorite.value = List<FavoriteModel>.from(
           jsonData['favorites'].map((model) => FavoriteModel.fromJson(model)));
-      // final Map<String, dynamic> parsed = json.decode(response.body);
-      // final List<dynamic> favoritelist = parsed['favorites'];
 
       print(favorite);
       update();
     }
   }
-
 }

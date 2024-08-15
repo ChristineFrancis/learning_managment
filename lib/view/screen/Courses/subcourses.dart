@@ -24,7 +24,7 @@ import '../../widget/searchwidget.dart';
 
 class SubCourseScreen extends StatelessWidget {
   final int subcourseInd;
-  final SubCourseConImp controller = Get.put(SubCourseConImp());
+  final CourseCountrollerImp controller = Get.put(CourseCountrollerImp());
   final FavouriteController controllerfav = Get.put(FavouriteController());
   final HomeControllerImp homeController = Get.put(HomeControllerImp());
   @override
@@ -36,9 +36,9 @@ class SubCourseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(FavouriteController());
-    controller.fetchCourses(subcourseInd);
-    return GetBuilder<CourseCountrollerImp>(
-        builder: (controller) => Scaffold(
+  
+    return GetBuilder<SubCourseConImp>(
+        builder: (controller1) => Scaffold(
                 body: Stack(children: [
               AnimatedBackground(
                   vsync: controller,
@@ -64,7 +64,8 @@ class SubCourseScreen extends StatelessWidget {
                             SizedBox(
                               child: CustomAppBar(
                                 onpressed: () {
-                                  Get.to(() => CoursesScreen(courseId: 0));
+                                  Get.back();
+                                  //    Get.to(() => CoursesScreen(courseId: 0));
                                 },
                                 text: 'Choose your\n course',
                                 mycontroller: homeController.search!,
@@ -89,6 +90,8 @@ class SubCourseScreen extends StatelessWidget {
                                         bottom: 10),
                                     child: Column(
                                       children: [
+                                        // controller.coursesList.isEmpty
+                                        //     ? CircularProgressIndicator()
                                         // Padding(
                                         //   padding: const EdgeInsets.only(
                                         //       left: 270.0),

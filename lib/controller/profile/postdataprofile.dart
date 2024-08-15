@@ -78,36 +78,5 @@ class ApiService {
     }
   }
 }
-    //   var uri = Uri.parse(AppUrl.updateprofile);
-
-    //   var request = http.MultipartRequest('POST', uri);
-    //   request.headers['Authorization'] = 'Bearer $token';
-    //   print(token);
-    //   request.fields['first_name'] = firstName;
-    //   request.fields['last_name'] = lastName;
-    //   request.fields['email'] = email;
-
-      // if (profilePicture != null) {
-      //   var mimeType = lookupMimeType(profilePicture.path);
-      //   request.files.add(
-      //     await http.MultipartFile.fromPath(
-      //       'profile_picture',
-      //       profilePicture.path,
-      //       //   contentType: MediaType.parse(mimeType!),
-      //       filename: basename(profilePicture.path),
-      //     ),
-      //);
-
-    //   var response = await request.send();
-    //   print(response.statusCode);
-    //   if (response.statusCode == 200) {
-    //     var responseData = await response.stream.bytesToString();
-    //     var jsonData = jsonDecode(responseData);
-    //     return UpdateStudent.fromJson(jsonData['data']);
-    //   } else {
-    //     print('Failed to update profile: ${response.reasonPhrase}');
-    //   }
-    // } catch (e) {
-    //   print('Error updating profile: $e');
-    // }
+    
   

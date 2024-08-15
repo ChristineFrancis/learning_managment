@@ -16,6 +16,10 @@
 //   }
 // }
 
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:learning_managment_system/services/services.dart';
+
 class Student {
   int? id;
   String? firstName;
@@ -33,7 +37,7 @@ class Student {
       this.createdFrom,
       this.image,
       this.wallet});
-
+ 
   factory Student.fromJson(Map<String, dynamic> json) {
     return Student(
       id: json['id'],

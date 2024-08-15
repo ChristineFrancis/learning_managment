@@ -9,7 +9,6 @@ import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
 import 'package:learning_managment_system/view/screen/profile/profilescreen.dart';
 
-
 // ignore: must_be_immutable, camel_case_types
 class Curved_NB extends StatelessWidget {
   Curved_NB({super.key});
@@ -19,11 +18,12 @@ class Curved_NB extends StatelessWidget {
 
   final screens = [
     HomePage(),
-    Icon(Icons.home),
+    // Icon(Icons.home),
+    ProfilePage(),
     //CourseDetails(),
     FavoriteScreen(),
+    // Icon(Icons.home),
     BeforeChatAi(),
-    ProfilePage(),
   ];
   final items = const [
     Icon(
@@ -51,7 +51,6 @@ class Curved_NB extends StatelessWidget {
       size: 25,
       color: Colors.white,
     ),
-    
   ];
   @override
   Widget build(BuildContext context) {
