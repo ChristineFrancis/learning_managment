@@ -22,21 +22,22 @@ class SubCourseConImp extends SubCourseCont {
   void onInit() {
     super.onInit();
     fetchCourses(0);
+    update();
   }
 
   var subId;
-  CourseCountrollerImp countrollerImp = Get.find();
+  // CourseCountrollerImp countrollerImp = Get.find();
   MyServices myServices = Get.find();
 
   var isLoading = false.obs;
 
   Future<void> fetchCourses(subcourseIndex) async {
+    //subcoursesList.refresh();
     subId = subcourseIndex;
     try {
       String? token = myServices.sharedPreferences.getString('access_token');
-      var url = '${AppUrl.baseUrl}/courses?categoryId=$subId';
-      var response = await client.get(Uri.parse(url), 
-      headers: {
+      var url = '${AppUrl.baseUrl}/courses?categoryId=${subId}';
+      var response = await client.get(Uri.parse(url), headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
       });
@@ -58,12 +59,12 @@ class SubCourseConImp extends SubCourseCont {
         print(jsonData);
         if (subcourseIndex >= 0 &&
             subcourseIndex < jsonData['courses'].length) {
-          coursemodel = Subcoursesmodel.fromJson(
-              jsonData['courses'][subcourseIndex]);
+          coursemodel =
+              Subcoursesmodel.fromJson(jsonData['courses'][subcourseIndex]);
+          update();
         }
       }
       update();
-      
     }
 
     // catch (e) {

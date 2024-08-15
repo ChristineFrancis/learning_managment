@@ -23,4 +23,5 @@ class AppColor {
   static Color purple5 = Color.fromARGB(255, 225, 200, 255).withOpacity(0.9);
   static Color purple6 = Color.fromARGB(255, 110, 76, 205);
   static const Color purple7 = Color(0xffF4EBFE);
+  static const Color darkDarkModeColor = Color.fromARGB(255, 45, 44, 46);
 }

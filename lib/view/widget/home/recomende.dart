@@ -16,7 +16,8 @@ class RecomendedHome extends StatelessWidget {
   RecomendedHome();
   final HomeController homeController = Get.put(HomeControllerImp());
   final RecomendeController controller = Get.put(RecomendeController());
-  final QuizVideosControllerImp videosControllerImp = Get.put(QuizVideosControllerImp());
+  final QuizVideosControllerImp videosControllerImp =
+      Get.put(QuizVideosControllerImp());
 
   final LatestController controllerLatest = Get.put(LatestController());
 
@@ -96,11 +97,12 @@ class RecomendedHome extends StatelessWidget {
                         : const SizedBox.shrink();
                   }
                   return InkWell(
-                    onTap: () async{
-                      await videosControllerImp.getCourseDetails(controller.allrecommendedCourses[index].id!); 
+                    onTap: () async {
+                      await videosControllerImp.getCourseDetails(
+                          controller.allrecommendedCourses[index].id!);
                       print('recoooomended');
                       print(controller.allrecommendedCourses[index].id!);
-                        Get.to(CourseDetailsPage());
+                      Get.to(CourseDetailsPage());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -177,7 +179,6 @@ class RecomendedHome extends StatelessWidget {
                                               fontWeight: FontWeight.w600))),
                                     ],
                                   ),
-                                   
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -207,26 +208,12 @@ class RecomendedHome extends StatelessWidget {
                                   ),
                                 ]),
                             Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Obx(() {
-                                if (controller.allrecommendedCourses[index]
-                                    .image!.isEmpty) {
-                                  return Image.asset(
-                                    ImageAsset.logoImage,
-                                    height: 150,
-                                    width: 100,
-                                  );
-                                } else {
-                                  return Image.network(
-                                    controller
-                                        .allrecommendedCourses[index].image!,
-                                    height: 70,
-                                    width: 20,
-                                    alignment: Alignment.topCenter,
-                                  );
-                                }
-                              }),
-                            ),
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Image.asset(
+                                  ImageAsset.logoImage,
+                                  height: 150,
+                                  width: 100,
+                                )),
                           ],
                         ),
                       ),

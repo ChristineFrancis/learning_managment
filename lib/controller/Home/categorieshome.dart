@@ -41,6 +41,7 @@ class CategoriesHomeController extends GetxController {
       print(response);
 
       print("true44444");
+      print(token);
       var jsonData = jsonDecode(response.body);
 
       categories.value = List<Categories>.from(

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Courses/subcoursescontroller.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
+import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../controller/search.dart';
@@ -12,6 +16,9 @@ class ListSubCoursesSearch extends StatelessWidget {
   final List<Subcoursesmodel> listdataModel;
   final HomeControllerImp homeController = Get.put(HomeControllerImp());
   ListSubCoursesSearch({super.key, required this.listdataModel});
+  final QuizVideosControllerImp videosControllerImp =
+      Get.put(QuizVideosControllerImp());
+  final SubCourseConImp controller = Get.put(SubCourseConImp());
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +53,12 @@ class ListSubCoursesSearch extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(top: 2.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      await videosControllerImp
+                          .getCourseDetails(homeController.listdata[index].id!);
+                     
+                     Get.to(CourseDetailsPage());
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 15, bottom: 0),

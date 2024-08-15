@@ -7,38 +7,44 @@ import 'package:learning_managment_system/core/constant/url.dart';
 import 'package:learning_managment_system/model/courses/coursemodel.dart';
 import 'package:learning_managment_system/services/services.dart';
 
-abstract class CoursesController extends GetxController with GetTickerProviderStateMixin {
- 
+abstract class CoursesController extends GetxController
+    with GetTickerProviderStateMixin {
   toggleAnimation();
   final http.Client client = http.Client();
   CoursesModel? courses;
 }
 
 class CourseCountrollerImp extends CoursesController {
-   AnimationController? animationController;
+  AnimationController? animationController;
   final isPlaying = false.obs;
-
-
 
   @override
   void onInit() {
-      animationController = AnimationController(
-    vsync: this,
-     duration: const Duration(milliseconds: 1000));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1000));
     animationController?.repeat();
-    
+   // fetchCourses(0);
     super.onInit();
   }
 
- @override
+  @override
   void dispose() {
     animationController?.dispose();
     super.dispose();
-  } 
-   @override
+  }
+
+  @override
   void toggleAnimation() {
     isPlaying.toggle();
-    isPlaying.value ? animationController?.forward() : animationController?.stop();
+    isPlaying.value
+        ? animationController?.forward()
+        : animationController?.stop();
+  }
+
+  @override
+  void onClose() {
+    animationController?.dispose();
+    super.onClose();
   }
 
   var courseId;
@@ -72,12 +78,8 @@ class CourseCountrollerImp extends CoursesController {
         }
       }
       update();
-     
     } finally {
-      
       print('done');
     }
   }
-
- 
 }

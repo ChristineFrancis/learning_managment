@@ -7,23 +7,25 @@ import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/screen/chatAi/ebefore_chat.dart';
 import 'package:learning_managment_system/view/screen/favoritepage.dart';
 import 'package:learning_managment_system/view/screen/homepage.dart';
-import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';
-
+import 'package:learning_managment_system/view/screen/profile/profilescreen.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class Curved_NB extends StatelessWidget {
-   Curved_NB({super.key});
+  Curved_NB({super.key});
   int page = 0;
-  BottomNavigationController bottomNavigationController = Get.put(BottomNavigationController());
+  BottomNavigationController bottomNavigationController =
+      Get.put(BottomNavigationController());
 
   final screens = [
-   HomePage(),
-  FavoriteScreen(),
-  BeforeChatAi(),
-  Icon(Icons.home),
-    
+    HomePage(),
+    // Icon(Icons.home),
+    ProfilePage(),
+    //CourseDetails(),
+    FavoriteScreen(),
+    // Icon(Icons.home),
+    BeforeChatAi(),
   ];
-  final items= const [
+  final items = const [
     Icon(
       Icons.home,
       size: 25,
@@ -49,7 +51,6 @@ class Curved_NB extends StatelessWidget {
       size: 25,
       color: Colors.white,
     ),
-    
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,12 +67,10 @@ class Curved_NB extends StatelessWidget {
           backgroundColor: Colors.transparent,
           buttonBackgroundColor: AppColor.primaryColor,
           color: AppColor.primaryColor,
-          animationDuration:const Duration(milliseconds: 500),
+          animationDuration: const Duration(milliseconds: 500),
           items: items,
           index: 0,
-          onTap: (index) => {
-            bottomNavigationController.changeIndex(index)
-          },
+          onTap: (index) => {bottomNavigationController.changeIndex(index)},
         ),
       ),
     );

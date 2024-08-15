@@ -3,6 +3,7 @@ class AppUrl {
   static String ip ='192.168.1.104';
   // static String base1='https://b4b8-5-0-28-39.ngrok-free.app';
   //  static String baseUrl='$base1/api/v1/students';
+  static String ip = '192.168.1.5';
   static String baseUrl = 'http://$ip:8000/api/v1/students';
   static String signUpUrl = "$baseUrl/auth/register";
   static String loginUrl = "$baseUrl/auth/login";
@@ -19,4 +20,6 @@ class AppUrl {
   static String sendQuiz = "$baseUrl/quizzes";
   static String contactUs = "$baseUrl/issues";
   static String favorite = "$baseUrl/courses/favorites";
+  static String profile = "$baseUrl/profile";
+  static String updateprofile = "$baseUrl/profile";
 }

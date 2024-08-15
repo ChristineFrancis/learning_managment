@@ -6,7 +6,6 @@ import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller
 import 'package:learning_managment_system/core/class/handlinigdataview.dart';
 import 'package:learning_managment_system/core/class/statusrequest.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
-import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/core/functions/alertexit.dart';
 import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
 import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';

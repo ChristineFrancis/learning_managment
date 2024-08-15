@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_managment_system/controller/search.dart';
 import 'package:learning_managment_system/controller/favorite/myfavorite.dart';
+import 'package:learning_managment_system/view/widget/courses/customapp.dart';
 import 'package:learning_managment_system/view/widget/favoritewidget.dart';
 import 'package:learning_managment_system/view/widget/home/customappbar.dart';
 
@@ -29,7 +30,7 @@ class FavoriteScreen extends StatelessWidget {
             builder: (homeController) => ListView(
                   children: [
                     SizedBox(
-                      child: CustomAppBarHome(
+                      child: CustomAppBar(
                         mycontroller: homeController.search!,
                         onPressedSearch: () {
                           homeController.onSearchCourse();
@@ -37,6 +38,7 @@ class FavoriteScreen extends StatelessWidget {
                         onChanged: (seachC) {
                           homeController.checkSearch(seachC);
                         },
+                        text: 'Your Favourite Courses',
                       ),
                     ),
                     !homeController.issearch.value
