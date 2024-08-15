@@ -8,6 +8,8 @@ import 'package:learning_managment_system/core/class/statusrequest.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/routes.dart';
 import 'package:learning_managment_system/core/functions/alertexit.dart';
+import 'package:learning_managment_system/view/screen/CourseDetails/courseDetails.dart';
+import 'package:learning_managment_system/view/screen/quiz/quizzes_videos.dart';
 import 'package:learning_managment_system/view/widget/Quiz/quest.dart';
 import 'package:learning_managment_system/view/widget/custom_widget/custom_button.dart';
 
@@ -18,16 +20,16 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     QuizVideosControllerImp controllerImp = Get.put(QuizVideosControllerImp());
     QuizControllerImp quizControllerImp = Get.put(QuizControllerImp());
-    RxBool timer=true.obs;
-
+   // RxBool timer=true.obs;
+    //WidgetsBinding.instance.addPostFrameCallback((_) {});
     return WillPopScope(
       onWillPop: alertExitFromQuiz,
       child: Scaffold(
         body: Obx(() {
+          // WidgetsBinding.instance.addPostFrameCallback((_) {});
           if (controllerImp.quizzes == null) {
             return Center(child: CircularProgressIndicator());
           }
-
           return HandinigDataRequest(statusRequest: quizControllerImp.statusRequest.value, widget: 
           Stack(
             children: [
@@ -60,26 +62,32 @@ class QuizPage extends StatelessWidget {
                         child:quizControllerImp.seeCorrectAnswers.value ? 
                          CustomButton(
                           textButton: quizControllerImp.seeCorrectAnswers.value ? 'Go Home' : 'Submit',
-                          onTap: ()  {
+                          onTap: () async {
+                            quizControllerImp.clearState();
+                            await controllerImp.getCourseDetails(quizControllerImp.quizId!); 
+                            print('CourseDetailsPage ${quizControllerImp.quizId!}');
                             Get.back();
                             Get.back();
-                         //   Get.back();
-
-                            //Get.offAllNamed(AppRoute.navbar);
+   //                         Get.back();
+                           Get.off(() => (QuizVideos()));
+                            // Get.back();
+                            // Get.back();
+                            // quizControllerImp.clearState();
+                         //   Get.back();//Get.offAllNamed(AppRoute.navbar);
                           },
                         )
                         : CustomButton(
                           textButton:'Submit',
                           onTap: () async {        
                             await quizControllerImp.postQuiz();
-                            if(quizControllerImp.statusRequest.value!=StatusRequest.offlineFailure)
-                            {timer.value=false;}
-                             timer.value=false;
+                            // if(quizControllerImp.statusRequest.value!=StatusRequest.offlineFailure)
+                            // {timer.value=false;}
+                            //  timer.value=false;
                           },
                         )
                       );
                     } else {
-                      var question = controllerImp.quizzes?.questions?[index];
+                    var question = controllerImp.quizzes?.questions?[index]; 
                       return Question(
                         question: question?.questionText ?? 'No question',
                         answer1: question?.choices?[0].choiceText ?? 'No answer',
@@ -104,7 +112,8 @@ class QuizPage extends StatelessWidget {
               Positioned(
                 bottom: 16.0,
                 right: 16.0,
-                child: quizControllerImp.seeCorrectAnswers.value  || timer.value==false
+                child: quizControllerImp.seeCorrectAnswers.value  
+                //|| timer.value==false
                     ? Text('')
                     : Container(
                         width: Get.width / 3,
@@ -141,8 +150,7 @@ class QuizPage extends StatelessWidget {
                                   onPressed: () async {
                                     Get.back();
                                     await quizControllerImp.postQuiz();
-                                  },
-                                  child: const Text(
+                                  },child: const Text(
                                     'Submit',
                                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600, color: AppColor.primaryColor),
                                   ),

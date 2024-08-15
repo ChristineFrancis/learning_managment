@@ -39,8 +39,11 @@ class ApiPostRequest {
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
+    print('respoooooooooonse.statusCode signUpp ${response.statusCode}');
+    print(response.body);
      Map responseBody = jsonDecode(response.body);
     print(response.body);
+    print('respoooooooooonse.statusCode signUpp ${response.statusCode}');
     return Right(responseBody);
      } 
     else

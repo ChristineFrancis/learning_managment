@@ -7,7 +7,7 @@ import 'package:learning_managment_system/view/widget/custom_widget/custom_butto
 
 
 class BeforeChatAi extends StatelessWidget {
-  const BeforeChatAi({super.key});
+   BeforeChatAi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ class BeforeChatAi extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 60 , vertical: 20),
                 child: CustomButton(textButton: "Try it", onTap: (){Get.to(Chat());}),
-              )
+              ),
+
           ],
         ),
       ),

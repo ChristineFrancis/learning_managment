@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learning_managment_system/controller/Quiz/quiz_videos_controller.dart';
 import 'package:learning_managment_system/core/constant/color.dart';
 import 'package:learning_managment_system/core/constant/imageasset.dart';
 import 'package:learning_managment_system/services/services.dart';
@@ -13,6 +14,7 @@ class BeforeQuizPage extends StatelessWidget {
     
   @override
   Widget build(BuildContext context) {
+    final controllerImp = Get.lazyPut(()=>QuizVideosControllerImp() , fenix: true);
     MyServices myServices = Get.find();
     String? name=myServices.sharedPreferences.getString('user name');
     return  Scaffold(
@@ -25,10 +27,6 @@ class BeforeQuizPage extends StatelessWidget {
                 child:Text( "$name,\nAre you ready????" ,textAlign: TextAlign.center,
                 style: TextStyle( color: AppColor.primaryColor , fontSize: 35 , fontWeight: FontWeight.w700 ,),)),
             ),
-            // const Text('Note:' ,
-            //  style: TextStyle( color: AppColor.violetColor , fontSize: 35 , fontWeight: FontWeight.w700 ,),),
-            //  const Text( "There is a timer will start as soon as " ,textAlign: TextAlign.center,
-            //     style: TextStyle( color: AppColor.primaryColor , fontSize: 35 , fontWeight: FontWeight.w700 ,),),
             LottieBuilder.asset(ImageAsset.brforeQuizLottie2 , width: 200 ),
                const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),

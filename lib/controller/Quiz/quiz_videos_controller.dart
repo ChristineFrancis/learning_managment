@@ -44,18 +44,6 @@ class QuizVideosControllerImp extends QuizVideosController {
     print('seeeeeeeeee content  $seeContent');
     print(name);
   }
-  // @override
-  // void onClose() {
-  //   enrollCourse=false;
-  //   print('Clooooooose Videos Quiiiiiiz Controller');
-  //   onDelete();
-  //   super.onClose();
-  // }
-  // @override
-  // void dispose() {
-  //   enrollCourse=false;
-  //   super.dispose();
-  // }
   
   @override
   getCourseDetails(int courseId) async {
@@ -105,7 +93,17 @@ class QuizVideosControllerImp extends QuizVideosController {
 
     print('Quizzes: ${jsonData}');
     print('Quiz Index: $quiznum');
-    print(quizzes?.timer);
+   
+  }
+  @override
+  bool cantGoToQuizPage(int quizIndex)
+  {
+    int? preGrade = myServices.sharedPreferences.getInt(quizIndex.toString());
+    if(preGrade!=null && preGrade>60)
+    return true;
+    else
+    return false;
+    
   }
 
   // fectchVideo(int videoIndex)async

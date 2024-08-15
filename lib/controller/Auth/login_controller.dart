@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -32,10 +33,12 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
    IconData suffixIconAuth=Icons.visibility_off_outlined;
   final isPlaying = false.obs;
 
+  String? deviceToken;
+
 
 
   @override
-  void onInit() {
+  void onInit() async{
     animationController = AnimationController(
        vsync: this, duration: const Duration(milliseconds: 1000));
     animationController?.repeat();
@@ -43,6 +46,8 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
 
     email=TextEditingController();
     password=TextEditingController();
+
+    await initNotifications();
     super.onInit();
   }
 
@@ -62,6 +67,15 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
     isPlaying.toggle();
     isPlaying.value ? animationController?.forward() : animationController?.stop();
   }
+
+  final _firebaseMessaging=FirebaseMessaging.instance;
+  Future <void> initNotifications()async{
+    await _firebaseMessaging.requestPermission();
+    final fCMtoken=await _firebaseMessaging.getToken();
+    deviceToken=fCMtoken;
+    print('Device Token :'+fCMtoken.toString());
+    print('deviceTooooooooken $deviceToken');
+  }
   
   @override
   login() async{
@@ -71,7 +85,9 @@ abstract class LoginController extends GetxController with GetTickerProviderStat
       update();
 
       try {
-        var response = await loginData.postData( email.text, password.text );
+        if(deviceToken.isNull){deviceToken='koko';}
+      print('deviceTooooooooken loooooogIn $deviceToken');
+        var response = await loginData.postData( email.text, password.text , deviceToken!);
          statusRequest = handlingData(response);
         if (statusRequest == StatusRequest.success) 
         {

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,9 +44,11 @@ class SignUpControllerImp extends SignUpController {
   // Photo
   Uint8List? image;
   File? myfile;
+
+  String? deviceToken;
   
   @override
-  void onInit() {
+  void onInit() async{
     animationController = AnimationController(
       vsync: this, 
       duration: const Duration(milliseconds: 1000)
@@ -57,6 +60,8 @@ class SignUpControllerImp extends SignUpController {
     firstName = TextEditingController();
     lastName = TextEditingController();
     confirmPassword = TextEditingController();
+
+   await initNotifications();
     super.onInit();
   }
 
@@ -77,21 +82,36 @@ class SignUpControllerImp extends SignUpController {
     isPlaying.value ? animationController?.forward() : animationController?.stop();
   }
 
+  final _firebaseMessaging=FirebaseMessaging.instance;
+  Future <void> initNotifications()async{
+    await _firebaseMessaging.requestPermission();
+    final fCMtoken=await _firebaseMessaging.getToken();
+    deviceToken=fCMtoken;
+    print('Device Token :'+fCMtoken.toString());
+    print('deviceTooooooooken $deviceToken');
+  }
+
   @override
   signUp() async {
     var formData = formState.currentState;
     if (formData!.validate()) {
       statusRequest = StatusRequest.loading;
       update();
+      // ignore: deprecated_member_use
+      if(deviceToken.isNull){deviceToken='koko';}
+      print('deviceTooooooooken signUpppppppppppppp $deviceToken');
 
-      try {
+
+      // try {
         var response = await signupData.postData(
           firstName.text, 
           lastName.text, 
           email.text, 
           password.text, 
           confirmPassword.text, 
-          myfile
+          myfile,
+          deviceToken!
+
         );
         statusRequest = handlingData(response);
         if (statusRequest == StatusRequest.success) {
@@ -142,10 +162,10 @@ class SignUpControllerImp extends SignUpController {
             statusRequest = StatusRequest.failure;
           }
         } 
-      } catch (e) {
-        statusRequest = StatusRequest.failure;
-        print('An errooooooooooooooooooooooooooor occurred: $e');
-      }
+      // } catch (e) {
+      //   statusRequest = StatusRequest.failure;
+      //   print('An errooooooooooooooooooooooooooor occurred: $e');
+      // }
       update();
     }
   }

@@ -84,7 +84,7 @@ class Answer extends StatelessWidget {
       title:Text(text) ,
       value:value , 
       groupValue: controller.groupValuelist[groupvalue], 
-    onChanged: (val){
+      onChanged: (val){
      controller.groupValuelist[groupvalue]=val;
      controller.addAnswerToListOfMaps(groupvalue, questionid, val);
      controller.update();

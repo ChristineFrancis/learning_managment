@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "725974255498",
+    "project_id": "leaning-management-syste-163fb",
+    "storage_bucket": "leaning-management-syste-163fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725974255498:android:d495475890ebdcc0f72a73",
+        "android_client_info": {
+          "package_name": "com.example.learning_managment_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvTKYq6FMf_waIlD7OiYIPlxkRQ5afkdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,7 +19,7 @@ class Splash extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Welcome To \nFEKRA' , 
+          Text('Welcome To \nFEKRA', 
           textAlign:TextAlign.center ,
     style: TextStyle
     (

@@ -120,31 +120,31 @@ class SubCourseWidget extends StatelessWidget {
                                 })
                               ],
                             ),
-                            Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Obx(() {
-                                  if (controller.subcoursesList[index]
-                                          .studentHasEnrolled ==
-                                      1) {
-                                    return CircularPercentIndicator(
-                                      radius: 45,
-                                      lineWidth: 12,
-                                      backgroundColor: AppColor.purple5,
-                                      progressColor: AppColor.primaryColor,
-                                      animation: true,
-                                      animationDuration: duration,
-                                      percent: controller
-                                          .subcoursesList[index].progress
-                                          .toDouble(),
-                                      center: Text(
-                                          '${controller.subcoursesList[index].progress}%'),
-                                      circularStrokeCap:
-                                          CircularStrokeCap.round,
-                                    );
-                                  } else {
-                                    return const SizedBox();
-                                  }
-                                })),
+                            // Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: Obx(() {
+                            //       if (controller.subcoursesList[index]
+                            //               .studentHasEnrolled ==
+                            //           1) {
+                            //         return CircularPercentIndicator(
+                            //           radius: 45,
+                            //           lineWidth: 12,
+                            //           backgroundColor: AppColor.purple5,
+                            //           progressColor: AppColor.primaryColor,
+                            //           animation: true,
+                            //           animationDuration: duration,
+                            //           percent: controller
+                            //               .subcoursesList[index].progress
+                            //               .toDouble(),
+                            //           center: Text(
+                            //               '${controller.subcoursesList[index].progress}%'),
+                            //           circularStrokeCap:
+                            //               CircularStrokeCap.round,
+                            //         );
+                            //       } else {
+                            //         return const SizedBox();
+                            //       }
+                            //     })),
                           ],
                         ),
                       ),
